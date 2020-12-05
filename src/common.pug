@@ -1,0 +1,39 @@
+//- Базовый шаблон сайта
+<!DOCTYPE html>
+html(lang="ru")
+  //- Head сайта
+  block head
+  head
+    //- Метатеги
+    block head__meta
+    // Метатеги
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    //- Тайтл
+    block title
+    //- Прилинкованные шрифты и стили
+    block head__links
+    //- Прилинкованные в head скрипты
+    block head__scripts
+    // Полифил плавного скролла нужен в заголовке сайта, чтобы прокрутка по якорям в меню срабатывала как можно скорее
+    script(src="js/common/smoothscroll/smoothscroll.min.js" async)
+    script(src="js/common/smoothscroll/smoothscroll-anchor-polyfill.min.js" async)
+
+  //- Тело сайта
+  body
+    //- Шапка сайта
+    block header
+      include ./common/header/header
+    //- Основной контент
+    main
+      block content
+      //- Подвал сайта
+      block footer
+        include ./common/footer/footer
+    //- Скрипты подключаемые в конце
+    block body__scripts
+      script(src='js/common/tippy/popper.min.js')
+      script(src='js/common/tippy/tippy-bundle.umd.min.js') 
+      // Инициализация скрипта подсказок
+      script
+        include ./common/includes/tippy/tippy-init.js

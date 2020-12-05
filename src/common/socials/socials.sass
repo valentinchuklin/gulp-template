@@ -1,0 +1,37 @@
+/* Кнопки социальных сетей - начало */
+.socials
+  display: block
+  position: relative
+  width: 25px
+  height: 25px
+  background-color: transparent
+  background-size: contain
+  background-position: center
+  &:focus
+    outline: none
+  &:after
+    position: absolute
+    top: 0px
+    right: 0px
+    bottom: 0px
+    left: 0px
+    content: ''
+    border-radius: 50%
+  &:focus:after
+    border: 3px solid $dark-purple
+  &:active:after
+    border: 3px solid $light-purple
+  &_vk
+    background-image: url('../img/common/socials/socials_vk.svg')
+  &_insta
+    background-image: url('../img/common/socials/socials_insta.svg')
+  &_fb
+    background-image: url('../img/common/socials/socials_fb.svg')
+  @media (min-width: 768px)
+    &
+      width: 46px
+      height: 46px
+  @media (hover: hover)
+    &:hover:after
+      border: 3px solid $light-purple
+/* Кнопки социальных сетей - конец */

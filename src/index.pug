@@ -1,0 +1,14 @@
+extends common
+
+block title
+  title Главная страница
+
+block head__links
+  include common/head/links
+  link(rel="preload" href="css/common.css" as="style")
+  link(rel="stylesheet" href="css/common.css")
+  link(rel="preload" href="css/index.css" as="style")
+  link(rel="stylesheet" href="css/index.css")
+
+block content
+  h1 Привет мир

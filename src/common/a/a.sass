@@ -1,0 +1,68 @@
+/* Ссылки - начало */
+a
+  font-weight: 600
+  text-decoration: none
+  color: $purple
+  transition: color 220ms ease-in-out
+  &:active
+    text-decoration: underline
+    color: $dark-purple
+  @media (hover: hover)
+    &:not(.btn):hover 
+      text-decoration: underline
+
+
+/* Ссылки с подчёркиванием */
+.a_underlined
+  line-height: 1
+  position: relative
+  font-weight: 400
+  &:after
+    position: absolute
+    content: ''
+    right: 0
+    bottom: 0px
+    left: 0
+    height: 1px
+    background-color: $purple
+    transform: translateY(2px)
+  &:active
+    font-weight: 700
+    letter-spacing: -0.85px
+    text-decoration: none
+  &:after:active
+    background-color: $dark-purple
+  &:focus
+    outline: none
+  &:focus:before
+    position: absolute
+    content: ''
+    top: 0
+    right: -5px
+    bottom: -10px
+    left: -5px
+    border: 2px solid $dark-purple
+  @media (hover: hover)
+    &:hover 
+      text-decoration: none
+      font-weight: 700
+      letter-spacing: -0.85px
+
+/* Ссылки почти чёрного цвета в списке details */
+.a_dark
+  line-height: 1
+  font-weight: 400
+  color: $dark
+  text-decoration: none
+  &:active
+    font-weight: 600
+    text-decoration: none
+    letter-spacing: -0.4px
+    color: $dark-purple !important
+  @media (hover: hover)
+    .a_dark:hover 
+      color: $purple
+      font-weight: 600
+      letter-spacing: -0.4px
+
+/* Ссылки - конец */
