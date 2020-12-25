@@ -42,7 +42,7 @@ const watchsasschanges = function () {
 const terser = require('gulp-terser');
  
 const jsfunction = function(){
-  return gulp.src('./src/**/*.js')
+  return gulp.src(['./src/**/*.js', '!./src/**/includes/**/*'])
     .pipe(terser())
     .pipe(gulp.dest('./dev-build/js/'));
 }
@@ -57,14 +57,14 @@ const imgCompress = require('imagemin-jpeg-recompress')
 const cache = require('gulp-cache');
 
 const imgfunction = function () {
-  return gulp.src(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif'])
+  return gulp.src(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif', '!./src/**/includes/**/*'])
     .pipe(
       cache(
         imagemin([
           imgCompress({
             loops: 4,
             min: 70,
-            max: 80,
+            max: 75,
             quality: 'high'
           }),
           imagemin.gifsicle(),
@@ -77,7 +77,7 @@ const imgfunction = function () {
 }
 //Watch img function
 const watchimg = function () {
-  gulp.watch('src/img/*.*', { events: 'all' }, imgfunction)
+  gulp.watch(['./src/**/*.jpg', './src/**/*.png', './src/**/*.svg', './src/**/*.gif', '!./src/**/includes/**/*'], { events: 'all' }, imgfunction)
 }
 
 //Копирование шрифтов

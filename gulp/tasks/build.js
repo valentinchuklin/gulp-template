@@ -13,10 +13,15 @@ const liveserver = function bsync() {
 
 //Pug2html
 const pug = require('gulp-pug')
+const htmlmin = require('gulp-htmlmin')
 
 const pugfunction = function pug2html(cb) {
   return gulp.src(['./src/*.pug', '!./src/common.pug'])
     .pipe(pug())
+    .pipe(htmlmin({
+      collapseWhitespace: true, // удаляем все переносы
+      removeComments: true // удаляем все комментарии
+    }))
     .pipe(gulp.dest('./build'))
 }
 
@@ -36,7 +41,7 @@ const sassfunction = function () {
 const terser = require('gulp-terser');
 
 const jsfunction = function () {
-  return gulp.src('./src/**/*.js')
+  return gulp.src(['./src/**/*.js', '!./src/**/includes/**/*'])
     .pipe(terser())
     .pipe(gulp.dest('./build/js/'));
 }
@@ -46,14 +51,14 @@ const imgCompress = require('imagemin-jpeg-recompress')
 const cache = require('gulp-cache');
 
 const imgfunction = function () {
-  return gulp.src(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif'])
+  return gulp.src(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif', '!./src/**/includes/**/*'])
     .pipe(
       cache(
         imagemin([
           imgCompress({
             loops: 4,
             min: 70,
-            max: 80,
+            max: 75,
             quality: 'high'
           }),
           imagemin.gifsicle(),

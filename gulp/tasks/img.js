@@ -5,7 +5,7 @@ const cache = require('gulp-cache');
 
 //В разработке
 module.exports = function img() {
-  return gulp.src(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif'])
+  return gulp.src(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif', '!./src/**/includes/**/*'])
     .pipe(
       cache(
         imagemin([
