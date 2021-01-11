@@ -1,39 +1,68 @@
 //- Базовый шаблон сайта
 <!DOCTYPE html>
-html(lang="ru")
-  //- Head сайта
+html.html(lang="ru")
   block head
   head
-    //- Метатеги
     block head__meta
-    // Метатеги
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    //- Тайтл
+      //- Метатеги
+      meta(charset="UTF-8")
+      meta(name="viewport" content="width=device-width, initial-scale=1.0")
     block title
-    //- Прилинкованные шрифты и стили
-    block head__links
-    //- Прилинкованные в head скрипты
-    block head__scripts
-    // Полифил плавного скролла нужен в заголовке сайта, чтобы прокрутка по якорям в меню срабатывала как можно скорее
-    script(src="js/common/smoothscroll/smoothscroll.min.js" async)
-    script(src="js/common/smoothscroll/smoothscroll-anchor-polyfill.min.js" async)
-
-  //- Тело сайта
-  body
-    //- Шапка сайта
+    //- Тайтл страницы (у каждой - свой)
+    block head__fonts
+      //ШРИФТЫ
+      link(rel="preload" href="fonts/open-sans-v18-latin_cyrillic-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous")
+      link(rel="preload" href="fonts/open-sans-v18-latin_cyrillic-700.woff2" as="font" type="font/woff2" crossorigin="anonymous")
+      link(rel="preload" href="fonts/open-sans-v18-latin_cyrillic-600.woff2" as="font" type="font/woff2" crossorigin="anonymous")
+    block head__third-party-styles
+      //
+      //СТОРОНИИЕ СТИЛИ СКРИПТОВ И БИБЛИОТЕК
+      //
+    block head__main-styles
+      //
+      //ОБЩИЕ СТИЛИ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
+      //
+      //Normalize.css
+      link(rel="preload" href="thirdparty/normalize.css/normalize.css" as="style")
+      link(rel="stylesheet" href="thirdparty/normalize.css/normalize.css")
+      //Основные стили сайта
+      link(rel="preload" href="css/common.css" as="style")
+      link(rel="stylesheet" href="css/common.css")
+    block head__page-styles
+      //
+      //СТИЛИ ТЕКУЩЕЙ СТРАНИЦЫ
+      //
+  body.body
+    //- Тело сайта
     block header
-      include ./common/header/header
-    //- Основной контент
-    main
+      //- Шапка сайта
+      //- include ./common/header-with-main-menu/header-with-main-menu
+    main.main
       block content
-      //- Подвал сайта
+        //- Основной контент
       block footer
-        include ./common/footer/footer
-    //- Скрипты подключаемые в конце
+        //- Подвал сайта
+        //- include ./common/footer/footer
     block body__scripts
-      script(src='js/common/tippy/popper.min.js')
-      script(src='js/common/tippy/tippy-bundle.umd.min.js') 
-      // Инициализация скрипта подсказок
-      script
-        include ./common/includes/tippy/tippy-init.js
+      //
+      //ПОДКЛЮЧЕНИЕ ОБЩИХ СКРИПТОВ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
+      //
+      //- //Полифил плавного скролла для Safari (2 файла. Исп. на каждой странице)
+      //- script(src="thirdparty/smoothscroll/smoothscroll.min.js" defer)
+      //- script(src="thirdparty/smoothscroll/smoothscroll-anchor-polyfill.min.js" defer)
+    block body__page-scripts
+      //
+      //ПОДКЛЮЧЕНИЕ СКРИПТОВ ТЕКУЩЕЙ СТРАНИЦЫ (ОПЦИОНАЛЬНО)
+      //
+    block body__scripts-init
+      //
+      //ИНИЦИАЛИЗАЦИИ ОБЩИХ СКРИПТОВ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
+      //
+      //- //Иниц. главное меню в шапке сайта глобально
+      //- script
+      //-   include ./common/main-menu/includes/main-menu__toggle-init.js
+    block body__page-scripts-init
+      //
+      //ИНИЦИАЛИЗАЦИИ СКРИПТОВ ТЕКУЩЕЙ СТРАНИЦЫ (ОПЦИОНАЛЬНО)
+      //
+      

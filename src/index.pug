@@ -1,14 +1,29 @@
 extends common
 
-block title
+append title
   title Главная страница
 
-block head__links
-  include common/head/links
-  link(rel="preload" href="css/common.css" as="style")
-  link(rel="stylesheet" href="css/common.css")
-  link(rel="preload" href="css/index.css" as="style")
-  link(rel="stylesheet" href="css/index.css")
-
+append head__third-party-styles
+  //- //Стандартные стили swiper-а
+  //- link(rel="preload" href="thirdparty/swiper/swiper-bundle.css" as="style")
+  //- link(rel="stylesheet" href="thirdparty/swiper/swiper-bundle.css")
+append head__page-styles
+  //- //Стили главной страницы
+  //- link(rel="preload" href="css/index.css" as="style")
+  //- link(rel="stylesheet" href="css/index.css")
 block content
-  h1 Привет мир
+  //- h1.visuallyhidden
+  //-   | Художественная галерея Blanchard - Главная страница
+  //- include ./pages/index/section-hero/section-hero
+  //- include ./pages/index/section-about/section-about
+append body__page-scripts
+  //- //Скрипты главной страницы
+  //- //
+  //- //Swiper - слайдер (исп. во многих местах главной страницы)
+  //- script(src='thirdparty/swiper/swiper-bundle.js' defer)
+append body__page-scripts-init
+  //- //Инициализация скриптов главной страницы
+  //- //
+  //- //Иниц. попап изображений из галереи
+  //- script
+  //-   include ./pages/index/section-gallery/includes/gallery.js
