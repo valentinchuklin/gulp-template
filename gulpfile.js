@@ -11,4 +11,4 @@ module.exports.build = build
 //Создание SVG symbol спрайтов
 module.exports.makeSvgSymbolSprite = makeSvgSymbolSprite
 //Очистка директорий build и dev-build
-module.exports.makeSvgSymbolSprite = cleanBuilds
+module.exports.cleanBuilds = cleanBuilds
