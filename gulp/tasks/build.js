@@ -86,7 +86,15 @@ const copythirdpartyfunction = function () {
   return gulp.src('./src/thirdparty/**/*')
     .pipe(gulp.dest('./build/thirdparty/'));
 }
+//Очистка папки build перед заданием
+const GulpClean = require('gulp-clean')
+
+const buildCleanFunction = function () {
+  return gulp.src('./build/*', {read: false})
+  .pipe(GulpClean())
+}
+
 //Final task
-const build = gulp.series(pugfunction, sassfunction, jsfunction, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
+const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
 
 module.exports = gulp.series(build)

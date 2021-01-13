@@ -115,9 +115,15 @@ const copythirdpartyfunction = function () {
 const watchthirdparty = function () {
   gulp.watch('./src/thirdparty/**/*', { events: 'all' }, copythirdpartyfunction)
 }
+//Очистка папки dev-build перед заданием
+const GulpClean = require('gulp-clean')
 
+const devBuildCleanFunction = function () {
+  return gulp.src('./dev-build/*', {read: false})
+  .pipe(GulpClean())
+}
 //Final task
-const build = gulp.series(pugfunction, sassfunction, jsfunction, imgfunction, copyfontsfunction, copythirdpartyfunction)
+const build = gulp.series(devBuildCleanFunction, pugfunction, sassfunction, jsfunction, imgfunction, copyfontsfunction, copythirdpartyfunction)
 const watch = gulp.parallel(liveserver, watchpugchanges, watchsasschanges, watchjs, watchimg, watchfonts, watchthirdparty)
 
 module.exports = gulp.series(build, watch)
