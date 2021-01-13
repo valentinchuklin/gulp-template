@@ -73,7 +73,7 @@ const imgCompress = require('imagemin-jpeg-recompress')
 const cache = require('gulp-cache');
 
 const imgfunction = function () {
-  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*'])
+  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*', '!./src/**/svg-sprite/**/*'])
     .pipe(
       cache(
         imagemin([
@@ -93,7 +93,7 @@ const imgfunction = function () {
 }
 //Watch img function
 const watchimg = function () {
-  gulp.watch(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif', '!./src/**/includes/**/*'], { events: 'all' }, imgfunction)
+  gulp.watch(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif', '!./src/**/includes/**/*', '!./src/**/svg-sprite/**/*'], { events: 'all' }, imgfunction)
 }
 
 //Копирование шрифтов
