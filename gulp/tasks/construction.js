@@ -67,13 +67,22 @@ const watchjs = function () {
   gulp.watch(['./src/**/*.js', '!./src/third-party/../*'], { events: 'all' }, jsfunction)
 }
 
+//Если будут самодельные svg-спрайты, лучше ещё раз всё проверить и сделать их
+const makeSvgSymbolSprite = require('./makeSvgSymbolSprite')
+module.exports.makeSvgSymbolSprite = makeSvgSymbolSprite
+
+//И будем следить за появлением форм в папке для includ-ов спрайта
+const watchSvgSpriteShapes = function () {
+  gulp.watch(['./src/common/includes/svg-sprite-shapes/*.svg'], { events: 'all' }, makeSvgSymbolSprite)
+}
+
 //Оптимизация картинок
 const imagemin = require('gulp-imagemin')
 const imgCompress = require('imagemin-jpeg-recompress')
 const cache = require('gulp-cache');
 
 const imgfunction = function () {
-  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*', '!./src/**/svg-sprite/**/*'])
+  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*'])
     .pipe(
       cache(
         imagemin([
@@ -93,7 +102,7 @@ const imgfunction = function () {
 }
 //Watch img function
 const watchimg = function () {
-  gulp.watch(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif', '!./src/**/includes/**/*', '!./src/**/svg-sprite/**/*'], { events: 'all' }, imgfunction)
+  gulp.watch(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif', '!./src/**/includes/**/*'], { events: 'all' }, imgfunction)
 }
 
 //Копирование шрифтов
@@ -123,7 +132,7 @@ const devBuildCleanFunction = function () {
   .pipe(GulpClean())
 }
 //Final task
-const build = gulp.series(devBuildCleanFunction, pugfunction, sassfunction, jsfunction, imgfunction, copyfontsfunction, copythirdpartyfunction)
-const watch = gulp.parallel(liveserver, watchpugchanges, watchsasschanges, watchjs, watchimg, watchfonts, watchthirdparty)
+const build = gulp.series(devBuildCleanFunction, pugfunction, sassfunction, jsfunction, makeSvgSymbolSprite, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
+const watch = gulp.parallel(watchpugchanges, watchsasschanges, watchjs, watchSvgSpriteShapes, watchimg, watchfonts, watchthirdparty)
 
 module.exports = gulp.series(build, watch)

@@ -1,10 +1,10 @@
 const gulp = require('gulp')
 //Очистка папки build перед заданием
-const GulpClean = require('gulp-clean')
+const gulpClean = require('gulp-clean')
 
 const buildsCleanFunction = function () {
   return gulp.src(['./build/*', './dev-build/*'], {read: false})
-  .pipe(GulpClean())
+  .pipe(gulpClean())
 }
 
 const cleanBuilds = gulp.series(buildsCleanFunction)

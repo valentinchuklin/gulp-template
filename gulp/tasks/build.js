@@ -1,14 +1,11 @@
 const gulp = require('gulp')
 
-// Live server
-const browsersync = require('browser-sync')
-const liveserver = function bsync() {
-  browsersync.init({
-    watch: true,
-    server: {
-      baseDir: "./build/",
-    }
-  })
+//Очистка папки build перед заданием
+const GulpClean = require('gulp-clean')
+
+const buildCleanFunction = function () {
+  return gulp.src('./build/*', {read: false})
+  .pipe(GulpClean())
 }
 
 //Pug2html
@@ -52,13 +49,17 @@ const jsfunction = function(){
   return gulp.src(['./src/**/*.js', '!./src/**/includes/**/*', '!./src/thirdparty/**/*'])
     .pipe(gulp.dest('./build/js/'));
 }
-//Оптимизация картинок
+//Если будут самодельные svg-спрайты, лучше ещё раз всё проверить и сделать их
+const makeSvgSymbolSprite = require('./makeSvgSymbolSprite')
+module.exports.makeSvgSymbolSprite = makeSvgSymbolSprite
+
+//Оптимизация и копирование картинок
 const imagemin = require('gulp-imagemin')
 const imgCompress = require('imagemin-jpeg-recompress')
 const cache = require('gulp-cache');
 
 const imgfunction = function () {
-  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*', '!./src/**/svg-sprite/**/*'])
+  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*'])
     .pipe(
       cache(
         imagemin([
@@ -86,15 +87,19 @@ const copythirdpartyfunction = function () {
   return gulp.src('./src/thirdparty/**/*')
     .pipe(gulp.dest('./build/thirdparty/'));
 }
-//Очистка папки build перед заданием
-const GulpClean = require('gulp-clean')
 
-const buildCleanFunction = function () {
-  return gulp.src('./build/*', {read: false})
-  .pipe(GulpClean())
+//Live server - проверим результат в браузере
+const browsersync = require('browser-sync')
+const liveserver = function bsync() {
+  browsersync.init({
+    watch: true,
+    server: {
+      baseDir: "./build/",
+    }
+  })
 }
 
 //Final task
-const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
+const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, makeSvgSymbolSprite, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
 
 module.exports = gulp.series(build)
