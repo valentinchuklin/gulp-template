@@ -30,11 +30,13 @@ const pugfunction = function pug2html(cb) {
 //Sass function
 const sass = require('gulp-sass')
 sass.compiler = require('node-sass')
+const autoprefixer = require('autoprefixer')
 const postcss = require('gulp-postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')
 
 const sassfunction = function () {
   var processors = [
+    autoprefixer(),
     sortMediaQueries({
       sort: 'mobile-first'
     })
