@@ -58,9 +58,9 @@ html.html(lang="ru")
       //
       //ИНИЦИАЛИЗАЦИИ ОБЩИХ СКРИПТОВ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
       //
-      //- //Иниц. главное меню в шапке сайта глобально
-      //- script
-      //-   include ./common/main-menu/includes/main-menu__toggle-init.js
+      //Если пользователь использует internet explorer, у него высветится сообщение о том, что его браузер больше не поддерживается
+      script
+        include ./common/init/ie.js
     block body__page-scripts-init
       //
       //ИНИЦИАЛИЗАЦИИ СКРИПТОВ ТЕКУЩЕЙ СТРАНИЦЫ (ОПЦИОНАЛЬНО)
