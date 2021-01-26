@@ -54,7 +54,7 @@ const sassfunction = function () {
 }
 //Watch sass function
 const watchsasschanges = function () {
-  gulp.watch('src/**/*.sass', { events: 'all' }, sassfunction)
+  gulp.watch('./src/**/*.sass', { events: 'all' }, sassfunction)
 }
 
 //JS function
@@ -73,7 +73,7 @@ module.exports.makeSvgSymbolSprite = makeSvgSymbolSprite
 
 //И будем следить за появлением форм в папке для includ-ов спрайта
 const watchSvgSpriteShapes = function () {
-  gulp.watch(['./src/common/includes/svg-sprite-shapes/*.svg'], { events: 'all' }, makeSvgSymbolSprite)
+  gulp.watch('./src/common/includes/svg-sprite-shapes/*.svg', { events: 'all' }, makeSvgSymbolSprite)
 }
 
 //Оптимизация картинок
@@ -102,7 +102,7 @@ const imgfunction = function () {
 }
 //Watch img function
 const watchimg = function () {
-  gulp.watch(['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.png', 'src/**/*.gif', '!./src/**/includes/**/*'], { events: 'all' }, imgfunction)
+  gulp.watch(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*'], { events: 'all' }, imgfunction)
 }
 
 //Копирование шрифтов
@@ -132,7 +132,7 @@ const devBuildCleanFunction = function () {
   .pipe(GulpClean())
 }
 //Final task
-const build = gulp.series(devBuildCleanFunction, pugfunction, sassfunction, jsfunction, makeSvgSymbolSprite, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
-const watch = gulp.parallel(watchpugchanges, watchsasschanges, watchjs, watchSvgSpriteShapes, watchimg, watchfonts, watchthirdparty)
+const build = gulp.series(devBuildCleanFunction, pugfunction, sassfunction, jsfunction, imgfunction, makeSvgSymbolSprite, copyfontsfunction, copythirdpartyfunction)
+const watch = gulp.parallel(liveserver, watchpugchanges, watchsasschanges, watchjs, watchimg, watchSvgSpriteShapes, watchfonts, watchthirdparty)
 
 module.exports = gulp.series(build, watch)
