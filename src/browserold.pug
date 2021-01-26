@@ -1,0 +1,31 @@
+extends common
+
+append title
+  title Главная страница
+
+block head
+  //- Метатеги
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-320, initial-scale=1.0")
+  title
+    | Ваш браузер устарел
+  //Normalize.css
+  link(rel="preload" href="thirdparty/normalize.css/normalize.css" as="style")
+  link(rel="stylesheet" href="thirdparty/normalize.css/normalize.css")
+  //Стили страницы с заглушкой для старых браузеров
+  link(rel="preload" href="css/browserold.css" as="style")
+  link(rel="stylesheet" href="css/browserold.css")
+block body
+  .patch
+    h1.patch__header
+      | Ваш браузер устарел
+    p.patch__cta
+      | Перейдите на сайт заново, используя один из новейших браузеров:
+    .patch__browsers
+      img.patch__browsers-img.patch__browsers-img__y(src='img/pages/browserold/yandex_512x512.png' alt='Логотип Яндекс браузер')
+      img.patch__browsers-img.patch__browsers-img__ff(src='img/pages/browserold/firefox_new_2_512x512.png' alt='Логотип браузера Firefox')
+      img.patch__browsers-img.patch__browsers-img__o(src='img/pages/browserold/opera_512x512.png' alt='Логотип браузера Opera')
+      img.patch__browsers-img.patch__browsers-img__e(src='img/pages/browserold/edge_512x512.png' alt='Логотип браузера Edge (chromium edition)')
+      img.patch__browsers-img.patch__browsers-img__ch(src='img/pages/browserold/chrome_512x512.png' alt='Логотип браузера Google Chrome')
+    p.patch__cta
+      | Или <a href="https://yandex.ru/soft/browsers/" title="Браузеры с сервисами Яндекс" target="_blank">воспользуйтесь ссылкой</a> для их установки.

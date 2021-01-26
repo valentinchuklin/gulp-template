@@ -8,6 +8,6 @@ function detectIE() {
 
   return false;
 }
-if (detectIE()) {
-  alert('Приносим свои изменения. Ваш браузер Internet Explorer устарел и больше не поддерживается разработчиками. Сайт может отображаться не корркетно. Зайдите на сайт, используя другой браузер: Google Chrome, Firefox, Opera или Yandex-браузер.')
+if (detectIE() && window.location.href.indexOf('browserold') < 0) {
+  window.location.replace('browserold.html');
 }

@@ -6,7 +6,7 @@ html.html(lang="ru")
     block head__meta
       //- Метатеги
       meta(charset="UTF-8")
-      meta(name="viewport" content="width=device-width, initial-scale=1.0")
+      meta(name="viewport" content="width=device-320, initial-scale=1.0")
     block title
     //- Тайтл страницы (у каждой - свой)
     block head__fonts
@@ -32,6 +32,7 @@ html.html(lang="ru")
       //
       //СТИЛИ ТЕКУЩЕЙ СТРАНИЦЫ
       //
+  block body
   body.body
     //- Тело сайта
     block header
@@ -60,7 +61,7 @@ html.html(lang="ru")
       //
       //Если пользователь использует internet explorer, у него высветится сообщение о том, что его браузер больше не поддерживается
       script
-        include ./common/init/ie.js
+        include ./common/init/includes/ie.js
     block body__page-scripts-init
       //
       //ИНИЦИАЛИЗАЦИИ СКРИПТОВ ТЕКУЩЕЙ СТРАНИЦЫ (ОПЦИОНАЛЬНО)
