@@ -5,9 +5,9 @@
 <h2>Структура проекта</h2>
 <p>Оснавная структура состоит из трёх папок:</p>
 <ol>
-  <li><code>src</code> - исходный код на PUG, SASS и т.д.</li>
-  <li><code>dev-build</code> - рабочий код сборки HTML, CSS, JS</li>
-  <li><code>build</code> - финальная сборка в HTML, CSS и JS с автопрефиксами</li>
+  <li><code>src</code> - исходный код на PUG, SASS др.;</li>
+  <li><code>dev-build</code> - рабочий код сборки HTML, CSS, JS;</li>
+  <li><code>build</code> - финальная сборка в HTML, CSS и JS с автопрефиксами.</li>
 </ol>
 <p>Таким обраозом, финальная сборка попадёт в папку <code>build</code>.</p>
 <p><strong>Служебные файлы</strong></p>
