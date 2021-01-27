@@ -1,7 +1,6 @@
 //- Базовый шаблон сайта
 <!DOCTYPE html>
 html.html(lang="ru")
-  block head
   head
     block head__meta
       //- Метатеги
@@ -18,13 +17,13 @@ html.html(lang="ru")
       //
       //СТОРОНИИЕ СТИЛИ СКРИПТОВ И БИБЛИОТЕК
       //
+      //Normalize.css
+      link(rel="preload" href="thirdparty/normalize.css/normalize.css" as="style")
+      link(rel="stylesheet" href="thirdparty/normalize.css/normalize.css")
     block head__main-styles
       //
       //ОБЩИЕ СТИЛИ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
       //
-      //Normalize.css
-      link(rel="preload" href="thirdparty/normalize.css/normalize.css" as="style")
-      link(rel="stylesheet" href="thirdparty/normalize.css/normalize.css")
       //Основные стили сайта
       link(rel="preload" href="css/common.css" as="style")
       link(rel="stylesheet" href="css/common.css")
@@ -32,7 +31,6 @@ html.html(lang="ru")
       //
       //СТИЛИ ТЕКУЩЕЙ СТРАНИЦЫ
       //
-  block body
   body.body
     //- Тело сайта
     block header
@@ -41,9 +39,9 @@ html.html(lang="ru")
     main.main
       block content
         //- Основной контент
-      block footer
-        //- Подвал сайта
-        //- include ./common/footer/footer
+    block footer
+      //- Подвал сайта
+      //- include ./common/footer/footer
     block body__scripts
       //
       //ПОДКЛЮЧЕНИЕ ОБЩИХ СКРИПТОВ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
@@ -61,7 +59,7 @@ html.html(lang="ru")
       //
       //Если пользователь использует internet explorer, у него высветится сообщение о том, что его браузер больше не поддерживается
       script
-        include ./common/init/includes/ie.js
+        include ./common/includes/browserold/browserold.js
     block body__page-scripts-init
       //
       //ИНИЦИАЛИЗАЦИИ СКРИПТОВ ТЕКУЩЕЙ СТРАНИЦЫ (ОПЦИОНАЛЬНО)
