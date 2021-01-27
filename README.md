@@ -15,7 +15,7 @@
 <p>Если node.js установлен, зависимости, необходимые для работы с исходными фалйами, устанавливаются с помощью вызова <code>npm i</code> в корневом каталоге, в консоли.</p>
 <p><strong>Задачи:</strong></p>
 <ul>
-  <li><code>gulp construction</code> и</li>
+  <li><code>gulp construction</code>,</li>
   <li><code>gulp build</code></li>
 </ul>
 <p>нужны для отслеживания изменений в <code>dev-build</code> и для финальной сборки проекта в <code>build</code> соответственно.</p>
