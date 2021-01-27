@@ -40,7 +40,7 @@
   <li>Создание svg-спрайтов;<br>
     <ul>
       <li>Опционально, поместив в папку <code>src/common/includes/svg-sprite-shapes</code> svg-файлы, с помощью задач <code>gulp build</code>, <code>gulp construction</code> и <code>gulp makeSvgSymbolSprite</code> можно получить svg-спрайт на основе тегов symbol.</li>
-      <ll>Готовый спрайт появится в папке <code>./src/common/svg-sprite/</code>, откуда переместится после сборке в соответствующую типу сборки папку <code>image/commmon/svg-sprite/</code></li>
+      <li>Готовый спрайт появится в папке <code>./src/common/svg-sprite/</code>, откуда переместится после сборке в соответствующую типу сборки папку <code>image/commmon/svg-sprite/</code></li>
     </ul>
   </li>
   <li>Помимо того в проекте используется browsersync сервер, для динамического отображения изменений в сборках на разных устройствах, раличные улучшения финального кодстайла, автопрефиксеры, и что важно отметить <b>сортировка медиазапросов стилей по технологии mobile-first</b>.</li>
