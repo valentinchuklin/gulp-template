@@ -1,15 +1,41 @@
+.body
+  position: relative
+  box-sizing: border-box
+  padding-top: 70px
+  background: transparent url('../img/pages/browserold/rose.jpg') no-repeat bottom
+  background-size: cover
+  min-height: 100vh
 .patch
   margin: 0 auto
-  padding: 20px
+  padding: 20px 10px 30px 6px
   width: 600px
-  height: 440px
   font-family: Arial, Helvetica, sans-serif
+  text-align: center
+  background: rgba(255, 255, 255, .89)
+  border-radius: 20px
+  border: 1px solid rgba(0, 0, 0, .2)
+  &__header
+    text-transform: uppercase
+  &__ie
+    margin-bottom: 20px
+    width: 300px
+  &__cta
+    margin-bottom: 20px
+    font-size: larger
+    font-weight: bold
+    line-height: 1.65
   &__browsers
     overflow: hidden
-    margin-bottom: 30px
+    padding: 15px 0
+    margin-bottom: 25px
+  &__browsers-links
+    transition: transform 110ms ease-in
+    &:not(:last-child)
+      margin-right: 35px
+    &:hover
+      transform: scale(1.13)
   &__browsers-img
-    float: left
     width: 64px
     height: 64px
-  &__browsers-img:not(:last-child)
-    margin-right: 59px
+  &__dl-link:hover
+    text-decoration: none
