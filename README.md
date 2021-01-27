@@ -31,12 +31,13 @@
 <p><strong>Подзадачи:</strong></p>
 <p>В проекте используется масса подзадач, среди которых можно отметить:</p>
 <ul>
-  <li>Сжатие изображений;</li>
+  <li>Сжатие изображений;<br>
     <ul>
       <li>Все изображения в <code>src</code> кроме папок <code>includes</code> Автоматически обрабатываются <code>gulp construction</code> и <code>gulp build</code> и попадут в папку <code>img</code> в сжатом виде в подкаталог, соответствующий положений в файловой системе относительно <code>src</code>.</li>
     </ul>
-  <li>Создание svg-спрайтов;</li>
-  <li>
+  </li>
+    
+  <li>Создание svg-спрайтов;<br>
     <ul>
       <li>Опционально, поместив в папку <code>src/common/includes/svg-sprite-shapes</code> svg-файлы, с помощью задач <code>gulp build</code>, <code>gulp construction</code> и <code>gulp makeSvgSymbolSprite</code> можно получить svg-спрайт на основе тегов symbol.</li>
       <ll>Готовый спрайт появится в папке <code>./src/common/svg-sprite/</code>, откуда переместится после сборке в соответствующую типу сборки папку <code>image/commmon/svg-sprite/</code></li>
