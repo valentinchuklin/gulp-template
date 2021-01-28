@@ -15,7 +15,7 @@ html.html(lang="ru")
       link(rel="preload" href="fonts/open-sans-v18-latin_cyrillic-600.woff2" as="font" type="font/woff2" crossorigin="anonymous")
     block head__third-party-styles
       //
-      //СТОРОНИИЕ СТИЛИ СКРИПТОВ И БИБЛИОТЕК
+      //СТОРОНИИЕ СТИЛИ
       //
       //Normalize.css
       link(rel="preload" href="thirdparty/normalize.css/normalize.css" as="style")
@@ -28,9 +28,9 @@ html.html(lang="ru")
       link(rel="preload" href="css/common.css" as="style")
       link(rel="stylesheet" href="css/common.css")
     block head__page-styles
-      //
-      //СТИЛИ ТЕКУЩЕЙ СТРАНИЦЫ
-      //
+      //- //
+      //- //СТИЛИ ТЕКУЩЕЙ СТРАНИЦЫ
+      //- //
   body.body
     //- Тело сайта
     block header
@@ -43,16 +43,16 @@ html.html(lang="ru")
       //- Подвал сайта
       //- include ./common/footer/footer
     block body__scripts
-      //
-      //ПОДКЛЮЧЕНИЕ ОБЩИХ СКРИПТОВ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
-      //
+      //- //
+      //- //ПОДКЛЮЧЕНИЕ ОБЩИХ СКРИПТОВ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
+      //- //
       //- //Полифил плавного скролла для Safari (2 файла. Исп. на каждой странице)
       //- script(src="thirdparty/smoothscroll/smoothscroll.min.js" defer)
       //- script(src="thirdparty/smoothscroll/smoothscroll-anchor-polyfill.min.js" defer)
     block body__page-scripts
-      //
-      //ПОДКЛЮЧЕНИЕ СКРИПТОВ ТЕКУЩЕЙ СТРАНИЦЫ (ОПЦИОНАЛЬНО)
-      //
+      //- //
+      //- //ПОДКЛЮЧЕНИЕ СКРИПТОВ ТЕКУЩЕЙ СТРАНИЦЫ (ОПЦИОНАЛЬНО)
+      //- //
     block body__scripts-init
       //
       //ИНИЦИАЛИЗАЦИИ ОБЩИХ СКРИПТОВ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
@@ -61,7 +61,7 @@ html.html(lang="ru")
       script
         include ./common/includes/browserold/browserold.js
     block body__page-scripts-init
-      //
-      //ИНИЦИАЛИЗАЦИИ СКРИПТОВ ТЕКУЩЕЙ СТРАНИЦЫ (ОПЦИОНАЛЬНО)
-      //
+      //- //
+      //- //ИНИЦИАЛИЗАЦИИ СКРИПТОВ ТЕКУЩЕЙ СТРАНИЦЫ (ОПЦИОНАЛЬНО)
+      //- //
       
