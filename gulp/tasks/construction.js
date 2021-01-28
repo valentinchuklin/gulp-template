@@ -75,14 +75,22 @@ module.exports.makeSvgSymbolSprite = makeSvgSymbolSprite
 const watchSvgSpriteShapes = function () {
   gulp.watch('./src/common/includes/svg-sprite-shapes/*.svg', { events: 'all' }, makeSvgSymbolSprite)
 }
-
+//Копируем спрайт в dev-build
+const copySvgSprite = function(){
+  return gulp.src('./src/common/svg-sprite/*')
+    .pipe(gulp.dest('./dev-build/img/common/svg-sprite/'));
+}
+//Следим, не появится ли новый спрайт, чтобы скопировать
+const watchSvgSprite = function () {
+  gulp.watch('./src/common/svg-sprite/*', { events: 'all' }, copySvgSprite)
+}
 //Оптимизация картинок
 const imagemin = require('gulp-imagemin')
 const imgCompress = require('imagemin-jpeg-recompress')
 const cache = require('gulp-cache');
 
 const imgfunction = function () {
-  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*'])
+  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*', '!./src/common/svg-sprite/*'])
     .pipe(
       cache(
         imagemin([
@@ -132,7 +140,7 @@ const devBuildCleanFunction = function () {
   .pipe(GulpClean())
 }
 //Final task
-const build = gulp.series(devBuildCleanFunction, pugfunction, sassfunction, jsfunction, imgfunction, makeSvgSymbolSprite, copyfontsfunction, copythirdpartyfunction)
-const watch = gulp.parallel(liveserver, watchpugchanges, watchsasschanges, watchjs, watchimg, watchSvgSpriteShapes, watchfonts, watchthirdparty)
+const build = gulp.series(devBuildCleanFunction, pugfunction, sassfunction, jsfunction, imgfunction, makeSvgSymbolSprite, copySvgSprite, copyfontsfunction, copythirdpartyfunction)
+const watch = gulp.parallel(liveserver, watchpugchanges, watchsasschanges, watchjs, watchimg, watchSvgSpriteShapes, watchSvgSprite, watchfonts, watchthirdparty)
 
 module.exports = gulp.series(build, watch)

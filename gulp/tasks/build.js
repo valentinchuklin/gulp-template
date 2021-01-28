@@ -54,14 +54,18 @@ const jsfunction = function(){
 //Если будут самодельные svg-спрайты, лучше ещё раз всё проверить и сделать их
 const makeSvgSymbolSprite = require('./makeSvgSymbolSprite')
 module.exports.makeSvgSymbolSprite = makeSvgSymbolSprite
-
+//Копируем спрайт в build
+const copySvgSprite = function(){
+  return gulp.src('./src/common/svg-sprite/*')
+    .pipe(gulp.dest('./build/img/common/svg-sprite/'));
+}
 //Оптимизация и копирование картинок
 const imagemin = require('gulp-imagemin')
 const imgCompress = require('imagemin-jpeg-recompress')
 const cache = require('gulp-cache');
 
 const imgfunction = function () {
-  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*'])
+  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*', '!./src/common/svg-sprite/*'])
     .pipe(
       cache(
         imagemin([
@@ -102,6 +106,6 @@ const liveserver = function bsync() {
 }
 
 //Final task
-const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, makeSvgSymbolSprite, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
+const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, makeSvgSymbolSprite, copySvgSprite, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
 
 module.exports = gulp.series(build)
