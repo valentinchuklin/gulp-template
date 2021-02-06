@@ -38,11 +38,13 @@ const watchpugchanges = function () {
 //Sass function
 const sass = require('gulp-sass')
 sass.compiler = require('node-sass')
+const autoprefixer = require('autoprefixer')
 const postcss = require('gulp-postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')
 
 const sassfunction = function () {
   var processors = [
+    autoprefixer(),
     sortMediaQueries({
       sort: 'mobile-first'
     })
@@ -66,7 +68,15 @@ const jsfunction = function(){
 const watchjs = function () {
   gulp.watch(['./src/**/*.js', '!./src/third-party/../*'], { events: 'all' }, jsfunction)
 }
-
+//PHP function
+const phpfunction = function(){
+  return gulp.src(['./src/**/*.php', '!./src/**/includes/**/*', '!./src/thirdparty/**/*'])
+    .pipe(gulp.dest('./dev-build/php/'));
+}
+//Watch PHP function
+const watchphp = function () {
+  gulp.watch(['./src/**/*.php', '!./src/third-party/../*'], { events: 'all' }, phpfunction)
+}
 //Если будут самодельные svg-спрайты, лучше ещё раз всё проверить и сделать их
 const makeSvgSymbolSprite = require('./makeSvgSymbolSprite')
 module.exports.makeSvgSymbolSprite = makeSvgSymbolSprite
@@ -140,7 +150,7 @@ const devBuildCleanFunction = function () {
   .pipe(GulpClean())
 }
 //Final task
-const build = gulp.series(devBuildCleanFunction, pugfunction, sassfunction, jsfunction, imgfunction, makeSvgSymbolSprite, copySvgSprite, copyfontsfunction, copythirdpartyfunction)
-const watch = gulp.parallel(liveserver, watchpugchanges, watchsasschanges, watchjs, watchimg, watchSvgSpriteShapes, watchSvgSprite, watchfonts, watchthirdparty)
+const build = gulp.series(devBuildCleanFunction, pugfunction, sassfunction, jsfunction, phpfunction, imgfunction, makeSvgSymbolSprite, copySvgSprite, copyfontsfunction, copythirdpartyfunction)
+const watch = gulp.parallel(liveserver, watchpugchanges, watchsasschanges, watchjs, watchphp, watchimg, watchSvgSpriteShapes, watchSvgSprite, watchfonts, watchthirdparty)
 
 module.exports = gulp.series(build, watch)

@@ -51,6 +51,11 @@ const jsfunction = function(){
   return gulp.src(['./src/**/*.js', '!./src/**/includes/**/*', '!./src/thirdparty/**/*'])
     .pipe(gulp.dest('./build/js/'));
 }
+//PHP function
+const phpfunction = function(){
+  return gulp.src(['./src/**/*.php', '!./src/**/includes/**/*', '!./src/thirdparty/**/*'])
+    .pipe(gulp.dest('./build/php/'));
+}
 //Если будут самодельные svg-спрайты, лучше ещё раз всё проверить и сделать их
 const makeSvgSymbolSprite = require('./makeSvgSymbolSprite')
 module.exports.makeSvgSymbolSprite = makeSvgSymbolSprite
@@ -106,6 +111,6 @@ const liveserver = function bsync() {
 }
 
 //Final task
-const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, makeSvgSymbolSprite, copySvgSprite, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
+const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, phpfunction, makeSvgSymbolSprite, copySvgSprite, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
 
 module.exports = gulp.series(build)
