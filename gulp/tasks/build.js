@@ -24,7 +24,7 @@ const pugfunction = function pug2html(cb) {
   return gulp.src(['./src/*.pug', '!./src/common.pug'])
     .pipe(pug())
     .pipe(replace('.css', '.css?t=' + cacheTimeStamp))
-    .pipe(replace('.js', '.css?t=' + cacheTimeStamp))
+    .pipe(replace('.js', '.js?t=' + cacheTimeStamp))
     .pipe(htmlmin(htmlminOptions))
     .pipe(gulp.dest('./build/'));
 }
