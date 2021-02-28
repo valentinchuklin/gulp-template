@@ -8,6 +8,6 @@ function detectIE() {
 
   return false;
 }
-if (detectIE() && window.location.href.indexOf('browserold') < 0) {
-  window.location.replace('browserold.html');
+if (detectIE() && window.location.href.indexOf('browser-old') < 0) {
+  window.location.replace('/browser-old/index.html');
 }
