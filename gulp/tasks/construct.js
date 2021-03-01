@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const rename = require('gulp-rename'); //Переименование
 
 // Live server
 const browsersync = require('browser-sync');
@@ -60,13 +61,26 @@ const watchsasschanges = function () {
 }
 
 //JS function
-const jsfunction = function () {
+//Функция сборщик скриптов страницы из build-script.pug в custom-script.js, если требуется
+const buildCustomStyle = function(){
+  return gulp.src('./src/**/build-script.pug')
+  .pipe(pug())
+  .pipe(rename(function(path){
+    path.basename = 'custom-script';
+    path.extname = '.js'
+  }))
+  .pipe(gulp.dest('./dev-build/'));
+}
+//Если скрипт небольшой минуем этап сборки и пишем сразу в custom-script.js
+const jsMinFunction = function () {
   return gulp.src(['./src/**/custom-script.js', '!./src/**/includes/**/*', '!./src/third-party/**/*'])
     .pipe(gulp.dest('./dev-build/'));
 }
+//Создаём серию
+const jsfunction = gulp.series(buildCustomStyle, jsMinFunction);
 //Watch js function
 const watchjs = function () {
-  gulp.watch(['./src/**/custom-script.js', '!./src/third-party/../*'], { events: 'all' }, jsfunction)
+  gulp.watch(['./src/**/custom-script.js', './src/**/build-script.pug', '!./src/third-party/../*'], { events: 'all' }, jsfunction)
 }
 //PHP function
 const phpfunction = function () {

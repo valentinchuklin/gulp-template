@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const GulpClean = require('gulp-clean'); //Очистка
 const replace = require('gulp-replace'); //Замена
+const rename = require('gulp-rename'); //Переименование
 
 //Очистка папки build перед заданием
 const buildCleanFunction = function () {
@@ -34,7 +35,6 @@ const autoprefixer = require('autoprefixer')
 const postcss = require('gulp-postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')
 const cssmin = require('gulp-cssmin')
-const rename = require('gulp-rename')
 
 const sassfunction = function () {
   var processors = [
@@ -52,8 +52,19 @@ const sassfunction = function () {
 }
 
 //JS function
+//Функция сборщик скриптов страницы из build-script.pug в custom-script.js, если требуется
+const buildCustomStyle = function(){
+  return gulp.src('./src/**/build-script.pug')
+  .pipe(pug())
+  .pipe(rename(function(path){
+    path.basename = 'custom-script';
+    path.extname = '.js'
+  }))
+  .pipe(minify())
+  .pipe(gulp.dest('./build/'));
+}
 const minify = require('gulp-minify');
-//Минифицируем JS
+//Если скрипт небольшой минуем этап сборки и пишем сразу в custom-script.js
 const jsMinFunction = function () {
   return gulp.src(['./src/**/custom-script.js', '!./src/**/includes/**/*', '!./src/third-party/**/*'])
     .pipe(minify())
@@ -61,11 +72,11 @@ const jsMinFunction = function () {
 }
 //Удаляем жирный JS
 const cleanJsFunction = function() {
-  return gulp.src('./build/**/custom-script.js', { read: false })
+  return gulp.src(['./build/**/custom-script.js'], { read: false })
     .pipe(GulpClean());
 }
 //Создаём серию
-const jsfunction = gulp.series(jsMinFunction, cleanJsFunction);
+const jsfunction = gulp.series(buildCustomStyle, jsMinFunction, cleanJsFunction);
 
 //PHP function
 const phpfunction = function () {
