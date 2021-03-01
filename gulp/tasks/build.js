@@ -22,7 +22,7 @@ const pugfunction = function pug2html(cb) {
   var cacheTimeStamp = new Date().getTime();
   return gulp.src(['./src/**/index.pug'])
     .pipe(pug())
-    .pipe(replace('custom-style.css', 'custom-style.css?t=' + cacheTimeStamp))
+    .pipe(replace('custom-style.css', 'custom-style-min.css?t=' + cacheTimeStamp))
     .pipe(replace('custom-script.js', 'custom-script-min.js?t=' + cacheTimeStamp))
     .pipe(htmlmin(htmlminOptions))
     .pipe(gulp.dest('./build/'));
@@ -34,6 +34,7 @@ const autoprefixer = require('autoprefixer')
 const postcss = require('gulp-postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')
 const cssmin = require('gulp-cssmin')
+const rename = require('gulp-rename')
 
 const sassfunction = function () {
   var processors = [
@@ -46,6 +47,7 @@ const sassfunction = function () {
     .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
     .pipe(postcss(processors))
     .pipe(cssmin())
+    .pipe(rename(function(path){path.basename += "-min"}))
     .pipe(gulp.dest('./build/'));
 }
 
