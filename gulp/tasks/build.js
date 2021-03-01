@@ -21,7 +21,7 @@ const pugfunction = function pug2html(cb) {
     preserveLineBreaks: true
   }
   var cacheTimeStamp = new Date().getTime();
-  return gulp.src(['./src/*.pug', '!./src/common.pug'])
+  return gulp.src(['./src/**/index.pug', '!./src/lab/**/*'])
     .pipe(pug())
     .pipe(replace('.css', '.css?t=' + cacheTimeStamp))
     .pipe(replace('.js', '.js?t=' + cacheTimeStamp))
@@ -43,7 +43,7 @@ const sassfunction = function () {
       sort: 'mobile-first'
     })
   ]
-  return gulp.src('src/*.sass')
+  return gulp.src('src/**/style.sass', '!./src/lab/**/*')
     .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(postcss(processors))
     .pipe(cssmin())
@@ -51,12 +51,12 @@ const sassfunction = function () {
 }
 //JS function
 const jsfunction = function(){
-  return gulp.src(['./src/**/*.js', '!./src/**/includes/**/*', '!./src/thirdparty/**/*'])
+  return gulp.src(['./src/**/*.js', '!./src/**/includes/**/*', '!./src/thirdparty/**/*', '!./src/lab/**/*'])
     .pipe(gulp.dest('./build/'));
 }
 //PHP function
 const phpfunction = function(){
-  return gulp.src(['./src/**/*.php', '!./src/**/includes/**/*', '!./src/thirdparty/**/*'])
+  return gulp.src(['./src/**/*.php', '!./src/**/includes/**/*', '!./src/thirdparty/**/*', '!./src/lab/**/*'])
     .pipe(gulp.dest('./build/'));
 }
 //Оптимизация и копирование картинок
@@ -65,7 +65,7 @@ const imgCompress = require('imagemin-jpeg-recompress');
 const cache = require('gulp-cache');
 
 const imgfunction = function () {
-  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*'])
+  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*', '!./src/lab/**/*'])
     .pipe(
       cache(
         imagemin([
