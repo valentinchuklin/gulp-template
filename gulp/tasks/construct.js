@@ -33,7 +33,7 @@ const pugfunction = function pug2html(cb) {
 }
 //Watch pug function
 const watchpugchanges = function () {
-  gulp.watch('src/**/*.pug', { events: 'all' }, pugfunction)
+  gulp.watch(['src/**/*.pug', '!./src/**/build-script.pug'], { events: 'all' }, pugfunction)
 }
 
 //Sass function
