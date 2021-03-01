@@ -96,7 +96,7 @@ const imgMinFunction = function () {
 }
 const webp = require('gulp-webp');
 const webpFunction = function(input, output) {
-  var input = ['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif'];
+  var input = ['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', '!src/browser-old/**/*.*'];
   var output = 'build/';
   return gulp.src(input)
     .pipe(webp())
