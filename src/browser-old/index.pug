@@ -1,0 +1,29 @@
+extends ../common/template
+append head__title
+  title Ваш браузер устарел
+append head__page-styles
+  link(rel="preload" href="/browser-old/custom-style.css" as="style")
+  link(rel="stylesheet" href="/browser-old/custom-style.css")
+block body
+  body.body
+    .patch
+      h1.patch__header
+        | Ваш браузер устарел
+      img.patch__ie(src="/browser-old/no-ie.png" alt="Перечёркнутый логотип Internet Explorer")
+      p.patch__cta
+        | Перейдите на сайт, используя другой браузер
+      .patch__browsers
+        a.patch__browsers-links(href="https://browser.yandex.ru/" title="Яндекс Браузер")
+          img.patch__browsers-img.patch__browsers-img__y(src='/browser-old/yandex_512x512.png' alt='Логотип Яндекс браузер')
+        a.patch__browsers-links(href="https://www.mozilla.org/" title="Firefox Браузер")
+          img.patch__browsers-img.patch__browsers-img__ff(src='/browser-old/firefox_new_2_512x512.png' alt='Логотип браузера Firefox')
+        a.patch__browsers-links(href="https://www.opera.com/" title="Opera Браузер")
+          img.patch__browsers-img.patch__browsers-img__o(src='/browser-old/opera_512x512.png' alt='Логотип браузера Opera')
+        a.patch__browsers-links(href="https://www.microsoft.com/edge" title="Microsoft Edge Браузер (На основе Chromium)")
+          img.patch__browsers-img.patch__browsers-img__e(src='/browser-old/edge_512x512.png' alt='Логотип браузера Edge (chromium edition)')
+        a.patch__browsers-links(href="https://www.google.ru/chrome/" title="Google Chrome Браузер")
+          img.patch__browsers-img.patch__browsers-img__ch(src='/browser-old/chrome_512x512.png' alt='Логотип браузера Google Chrome')
+      p.patch__cta
+        | или <a class="patch__dl-link" href="https://yandex.ru/soft/browsers/" title="Браузеры с сервисами Яндекс" target="_blank">воспользуйтесь ссылкой</a><br> для установки браузера, отличного от Internet Explorer.
+
+    

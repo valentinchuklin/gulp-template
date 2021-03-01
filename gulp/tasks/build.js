@@ -1,17 +1,16 @@
 const gulp = require('gulp');
+const GulpClean = require('gulp-clean'); //Очистка
+const replace = require('gulp-replace'); //Замена
 
 //Очистка папки build перед заданием
-const GulpClean = require('gulp-clean');
-
 const buildCleanFunction = function () {
-  return gulp.src('./build/*', {read: false})
-  .pipe(GulpClean());
+  return gulp.src('./build/*', { read: false })
+    .pipe(GulpClean());
 }
 
 //Pug2html
 const pug = require('gulp-pug');
 const htmlmin = require('gulp-htmlmin');
-const replace = require('gulp-replace');
 const pugfunction = function pug2html(cb) {
   var htmlminOptions = {
     collapseWhitespace: true,
@@ -21,10 +20,10 @@ const pugfunction = function pug2html(cb) {
     preserveLineBreaks: true
   }
   var cacheTimeStamp = new Date().getTime();
-  return gulp.src(['./src/**/index.pug', '!./src/lab/**/*'])
+  return gulp.src(['./src/**/index.pug'])
     .pipe(pug())
-    .pipe(replace('.css', '.css?t=' + cacheTimeStamp))
-    .pipe(replace('.js', '.js?t=' + cacheTimeStamp))
+    .pipe(replace('custom-style.css', 'custom-style.css?t=' + cacheTimeStamp))
+    .pipe(replace('custom-script.js', 'custom-script-min.js?t=' + cacheTimeStamp))
     .pipe(htmlmin(htmlminOptions))
     .pipe(gulp.dest('./build/'));
 }
@@ -43,20 +42,32 @@ const sassfunction = function () {
       sort: 'mobile-first'
     })
   ]
-  return gulp.src('src/**/style.sass', '!./src/lab/**/*')
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+  return gulp.src('src/**/custom-style.sass')
+    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
     .pipe(postcss(processors))
     .pipe(cssmin())
     .pipe(gulp.dest('./build/'));
 }
+
 //JS function
-const jsfunction = function(){
-  return gulp.src(['./src/**/*.js', '!./src/**/includes/**/*', '!./src/thirdparty/**/*', '!./src/lab/**/*'])
+const minify = require('gulp-minify');
+//Минифицируем JS
+const jsMinFunction = function () {
+  return gulp.src(['./src/**/custom-script.js', '!./src/**/includes/**/*', '!./src/third-party/**/*'])
+    .pipe(minify())
     .pipe(gulp.dest('./build/'));
 }
+//Удаляем жирный JS
+const cleanJsFunction = function() {
+  return gulp.src('./build/**/custom-script.js', { read: false })
+    .pipe(GulpClean());
+}
+//Создаём серию
+const jsfunction = gulp.series(jsMinFunction, cleanJsFunction);
+
 //PHP function
-const phpfunction = function(){
-  return gulp.src(['./src/**/*.php', '!./src/**/includes/**/*', '!./src/thirdparty/**/*', '!./src/lab/**/*'])
+const phpfunction = function () {
+  return gulp.src(['./src/**/*.php', '!./src/**/includes/**/*', '!./src/third-party/**/*'])
     .pipe(gulp.dest('./build/'));
 }
 //Оптимизация и копирование картинок
@@ -64,8 +75,8 @@ const imagemin = require('gulp-imagemin');
 const imgCompress = require('imagemin-jpeg-recompress');
 const cache = require('gulp-cache');
 
-const imgfunction = function () {
-  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*', '!./src/lab/**/*'])
+const imgMinFunction = function () {
+  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*'])
     .pipe(
       cache(
         imagemin([
@@ -83,15 +94,24 @@ const imgfunction = function () {
     )
     .pipe(gulp.dest('build/'));
 }
+const webp = require('gulp-webp');
+const webpFunction = function(input, output) {
+  var input = ['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif'];
+  var output = 'build/';
+  return gulp.src(input)
+    .pipe(webp())
+    .pipe(gulp.dest(output));
+}
+const imgfunction = gulp.series(imgMinFunction, webpFunction);
 //Копирование шрифтов
 const copyfontsfunction = function () {
   return gulp.src('./src/common/fonts/*.woff*')
     .pipe(gulp.dest('./build/common/fonts/'));
 }
 //Копирование сторонних скриптов
-const copythirdpartyfunction = function () {
-  return gulp.src('./src/thirdparty/**/*')
-    .pipe(gulp.dest('./build/thirdparty/'));
+const copyThirdPartyFunction = function () {
+  return gulp.src('./src/third-party/**/*')
+    .pipe(gulp.dest('./build/third-party/'));
 }
 
 //Live server - проверим результат в браузере
@@ -106,6 +126,6 @@ const liveserver = function bsync() {
 }
 
 //Final task
-const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, phpfunction, imgfunction, copyfontsfunction, copythirdpartyfunction, liveserver)
+const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, phpfunction, imgfunction, copyfontsfunction, copyThirdPartyFunction, liveserver)
 
 module.exports = gulp.series(build)

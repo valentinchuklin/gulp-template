@@ -5,7 +5,7 @@ html.html(lang="ru")
     block head__meta
       //- Метатеги
       meta(charset="UTF-8")
-      meta(name="viewport" content="width=device-320, initial-scale=1.0")
+      meta(name="viewport" content="width=320, initial-scale=1.0")
     block head__description 
       meta(name="description" content="Основной шаблон сайта")
     block head__title
@@ -30,32 +30,32 @@ html.html(lang="ru")
       //СТОРОНИИЕ СТИЛИ
       //
       //Normalize.css
-      link(rel="preload" href="/thirdparty/normalize.css/normalize.css" as="style")
-      link(rel="stylesheet" href="/thirdparty/normalize.css/normalize.css")
+      link(rel="preload" href="/third-party/normalize.css/normalize.css" as="style")
+      link(rel="stylesheet" href="/third-party/normalize.css/normalize.css")
       //
       //ОБЩИЕ СТИЛИ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
       //
-      //Основные стили сайта
-      link(rel="preload" href="/common/style.css" as="style")
-      link(rel="stylesheet" href="/common/style.css")
+      link(rel="preload" href="/common/custom-style.css" as="style")
+      link(rel="stylesheet" href="/common/custom-style.css")
     block head__page-styles
-      //- //
-      //- //СТИЛИ ТЕКУЩЕЙ СТРАНИЦЫ
-      //- //
-  body.body
-    //- Тело сайта
-    block header
-      //- Шапка сайта
-      //- include ./common/header-with-main-menu/header-with-main-menu
-    main.main
-      block content
-        //- Основной контент
-    block footer
-      //- Подвал сайта
-      //- include ./common/footer/footer
-    block body__scripts
       //
-      //ПОДКЛЮЧЕНИЕ СКРИПТОВ
+      //СТИЛЬ ТЕКУЩЕЙ СТРАНИЦЫ
       //
-      script(src="/browser-old/script.js" defer)
+  block body
+    body.body
+      //- Тело сайта
+      block header
+        //- Шапка сайта
+        //- include ./common/header-with-main-menu/header-with-main-menu
+      main.main
+        block content
+          //- Основной контент
+      block footer
+        //- Подвал сайта
+        //- include ./common/footer/footer
+      block body__scripts
+        //
+        //ПОДКЛЮЧЕНИЕ СКРИПТОВ
+        //
+        script(src="/browser-old/custom-script.js" async)
       

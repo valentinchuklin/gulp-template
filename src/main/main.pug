@@ -1,11 +1,7 @@
 extends ../common/template
-append head__styles
-  //
-  //СТИЛИ ТЕКУЩЕЙ СТРАНИЦЫ
-  //
-  //Стили главной страницы
-  link(rel="preload" href="/main/style.css" as="style")
-  link(rel="stylesheet" href="/main/style.css")
+append head__page-styles
+  link(rel="preload" href="/main/custom-style.css" as="style")
+  link(rel="stylesheet" href="/main/custom-style.css")
 append head__title
   title Главная страница
 append content
