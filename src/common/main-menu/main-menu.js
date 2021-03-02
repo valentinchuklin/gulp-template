@@ -1,4 +1,5 @@
 //Скрипт-конструктор адаптивного меню
+//N.B. Для корректной работы фокуса потребуется подключение плагина focusManager http://isaacandela.github.io/focus-manager/ До вызова этого скрипта
 function AdaptiveMenu(
   //Аргументы по умолчанию 
   //Они могут быть переопределены в новом экземпляре только в полном составе в настоящий момент
@@ -24,6 +25,7 @@ function AdaptiveMenu(
   }
   lastViewportDisplaySmall = window.innerWidth < mainMenuDesktopBreakPoint; //Чтобы правильно отображать или скрывать меню при изменении вьюпорта потребуется определить был ли вьюпорт достаточно мал, чтобы показать адаптивный вариант меню
   isFocusManager = focusManager != null; //Проверяем подключён ли фокус-менеджер
+  
   //функция открытия главного меню
   this.openMainMenuFunction = function () {
     mainMenuNotVisible = window.getComputedStyle(mainMenuPanel, null).getPropertyValue('display') == 'none';
@@ -77,4 +79,6 @@ function AdaptiveMenu(
   mainMenuCloseButton.addEventListener('click', this.closeMainMenuFunction); //По клику на крестик - закрыть меню
 }
 
-var adaptiveMainMenu = new AdaptiveMenu();
+document.addEventListener('DOMContentLoaded', function() {
+  var adaptiveMainMenu = new AdaptiveMenu(); //Вызов экземпляра объекта мменю
+})
