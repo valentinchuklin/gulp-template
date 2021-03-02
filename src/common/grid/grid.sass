@@ -1,17 +1,17 @@
 /*СЕТКА
-//Максимальная ширина контейнера без учёта полей
-$container-size: 1600px
-// Количество колонок
+//Максимальная ширина контейнера вместе с полями
+$container-size: 1700px
+//Количество колонок
 $columns: 12
-// Поля у контейнера
+//Поля у контейнера
 $container-padding: 5px
-// Гаттеры
+//Гаттеры
 $gutter: 10px
 
 .container
   margin: 0 auto
-  width: 100%
-  max-width: 1700px
+  min-width: 100%
+  max-width: $container-size
   padding-left: $container-padding
   padding-right: $container-padding
 .row

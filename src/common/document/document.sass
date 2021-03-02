@@ -1,15 +1,15 @@
 
 /*БАЗОВЫЕ ПАРАМЕТРЫ ДОКУМЕНТА
+//Размеры элементов включают в себя краницы и поля
 *
   box-sizing: border-box
-::focus
+//Убираем аутлайн у элементов, не сфокусированных явно с клавиатуры
+::focus:not(:focus-visible)
   outline: none
 // Remove border and padding in Firefox
 ::-moz-focus-outer, ::-moz-focus-inner
     border: 0
     padding: 0
-// Плавный скролл и полифил
+// Плавный скролл, если поддерживается
 .html
-  --scroll-behavior: smooth
   scroll-behavior: smooth
-// Основной стиль страницы
