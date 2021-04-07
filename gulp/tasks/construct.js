@@ -29,7 +29,8 @@ const pugfunction = function pug2html(cb) {
     .pipe(pug())
     .pipe(htmlmin(htmlminOptions))
     .pipe(htmlBeautify(htmlBeautifyOptions))
-    .pipe(gulp.dest('./dev-build'));
+    .pipe(gulp.dest('./dev-build'))
+    .pipe(browsersync.stream());
 }
 //Watch pug function
 const watchpugchanges = function () {
@@ -53,7 +54,8 @@ const sassfunction = function () {
   return gulp.src(['src/**/custom-style.sass'])
     .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
     .pipe(postcss(processors))
-    .pipe(gulp.dest('./dev-build/'));
+    .pipe(gulp.dest('./dev-build/'))
+    .pipe(browsersync.stream());
 }
 //Watch sass function
 const watchsasschanges = function () {
@@ -69,12 +71,14 @@ const buildCustomStyle = function(){
     path.basename = 'custom-script';
     path.extname = '.js'
   }))
-  .pipe(gulp.dest('./dev-build/'));
+  .pipe(gulp.dest('./dev-build/'))
+  .pipe(browsersync.stream());
 }
 //Если скрипт небольшой минуем этап сборки и пишем сразу в custom-script.js
 const jsMinFunction = function () {
   return gulp.src(['./src/**/custom-script.js', '!./src/**/includes/**/*', '!./src/third-party/**/*'])
-    .pipe(gulp.dest('./dev-build/'));
+    .pipe(gulp.dest('./dev-build/'))
+    .pipe(browsersync.stream());
 }
 //Создаём серию
 const jsfunction = gulp.series(buildCustomStyle, jsMinFunction);
@@ -85,7 +89,8 @@ const watchjs = function () {
 //PHP function
 const phpfunction = function () {
   return gulp.src(['./src/**/*.php', '!./src/**/includes/**/*', '!./src/third-party/**/*', '!./lab/**/*'])
-    .pipe(gulp.dest('./dev-build/'));
+    .pipe(gulp.dest('./dev-build/'))
+    .pipe(browsersync.stream());
 }
 //Watch PHP function
 const watchphp = function () {
@@ -112,7 +117,8 @@ const imgMinFunction = function () {
         ])
       )
     )
-    .pipe(gulp.dest('dev-build/'));
+    .pipe(gulp.dest('dev-build/'))
+    .pipe(browsersync.stream());
 }
 const webp = require('gulp-webp');
 const webpFunction = function(input, output) {
@@ -131,7 +137,8 @@ const watchimg = function () {
 //Копирование шрифтов
 const copyfontsfunction = function () {
   return gulp.src('./src/common/fonts/*.woff*')
-    .pipe(gulp.dest('./dev-build/common/fonts/'));
+    .pipe(gulp.dest('./dev-build/common/fonts/'))
+    .pipe(browsersync.stream());
 }
 //Watch fonts
 const watchfonts = function () {
@@ -141,7 +148,8 @@ const watchfonts = function () {
 //Копирование сторонних скриптов
 const copyThirdPartyFunction = function () {
   return gulp.src('./src/third-party/**/*')
-    .pipe(gulp.dest('./dev-build/third-party/'));
+    .pipe(gulp.dest('./dev-build/third-party/'))
+    .pipe(browsersync.stream());
 }
 //Watch third-party
 const watchThirdPartyFunction = function () {

@@ -12,7 +12,7 @@ module.exports.cleanBuilds = cleanBuilds;
 
 //ЛАБОРАТОРИЯ
 const makeSvgSymbolSprite = require('./gulp/tasks/makeSvgSymbolSprite');
-const convertToWebp = require('./gulp/tasks/webpFunction');
+const convertToWebp = require('./gulp/tasks/convertToWebp');
 
 //Конвертировать в webp в лаборатории
 module.exports.convertToWebp = convertToWebp;

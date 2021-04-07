@@ -1,0 +1,85 @@
+.footer
+  position: relative
+  background-image: url('/common/background/background_w_1080.webp')
+  background-repeat: no-repeat
+  background-position: center
+  background-size: cover
+  @media (min-width: 768px)
+    background-image: url('/common/background/background_w_1536.webp')
+  @media (min-width: 1024px)
+    background-image: url('/common/background/background_w_2048.webp')
+  @media (min-width: 1480px)
+    background-image: url('/common/background/background_w_1920.webp')
+  @media (min-width: 1921px) 
+    background-image: url('/common/background/background_w_3840.webp')
+  @media print
+    display: none
+  &::after
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    content: ''
+    z-index: 2
+    background-image:  linear-gradient(360deg, rgba(38, 49, 79, 0.69) 15.35%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #F8F8F8 0%, rgba(145, 157, 198, 0.18) 100%)
+  &__container
+    position: relative
+    display: flex
+    flex-direction: column
+    justify-content: flex-end
+    min-height: 469px
+    padding-bottom: 27px
+    z-index: 3
+    @media (min-width: 1480px)
+      padding-bottom: 23px
+      min-height: 450px
+  &__props-logo-and-copyright
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    @media (min-width: 1480px)
+      align-items: center
+  &__logo
+    margin-bottom: 42px
+    flex-shrink: 0
+    width: 100%
+    order: 1
+    @media (min-width: 768px)
+      margin-bottom: 51px 
+    @media (min-width: 1480px)
+      margin: 0 auto
+      order: 3
+      width: 234px
+  &__props
+    display: flex
+    flex-wrap: nowrap
+    margin-bottom: 10px
+    order: 2
+    @media (min-width: 768px)
+      order: 3
+    @media (min-width: 1480px)
+      margin-bottom: 0
+      order: 3
+  &__privat
+    margin-right: 30px
+  &__copyright
+    display: block
+    font-family: 'Lato', sans-serif
+    font-size: 16px
+    line-height: 24px
+    font-weight: 700
+    color: $white_1
+    width: 100%
+    text-align: center
+    order: 3
+    @media (min-width: 768px)
+      width: auto
+      text-align: left
+      order: 2
+      margin-right: auto
+    @media (min-width: 1480px)
+      margin-right: 140px
+      order: 1
+
+      
