@@ -3,17 +3,9 @@
 //Размеры элементов включают в себя краницы и поля
 *
   box-sizing: border-box
-//Убираем аутлайн у элементов, не сфокусированных явно с клавиатуры
-::focus:not(:focus-visible)
-  outline: none
-// Remove border and padding in Firefox
-::-moz-focus-outer, ::-moz-focus-inner
-    border: 0
-    padding: 0
 // Плавный скролл, если поддерживается
-.html
+html
   scroll-behavior: smooth
-//Предпочитаю, чтобы все picture сразу принимали размеры содержимого, а у img отсутствовал margin
 body
   font-family: 'Open Sans', Arial, Helvetica, sans-serif
   font-weight: 400
@@ -22,6 +14,14 @@ body
   color: $dark
   @media (min-width: 768px)
     font-size: 16px
+//Убираем аутлайн у элементов, не сфокусированных явно с клавиатуры
+::focus:not(:focus-visible)
+  outline: none
+// Remove border and padding in Firefox
+::-moz-focus-outer, ::-moz-focus-inner
+    border: 0
+    padding: 0
+//Предпочитаю, чтобы все picture сразу принимали размеры содержимого, а у img отсутствовал margin снизу
 picture, img
   display: block
   overflow: hidden
