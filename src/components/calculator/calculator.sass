@@ -1,0 +1,190 @@
+.calculator
+  display: block
+  position: relative
+  width: 345px
+  background-size: cover
+  background-position: right bottom
+  opacity: 0.75
+  background-image: url('/common/background/background_w_1080.jpg')
+  @media (min-width: 768px)
+    background-image: url('/common/background/background_w_1536.jpg')
+  @media (min-width: 1024px)
+    width: 465px
+    background-image: url('/common/background/background_w_2048.jpg')
+  @media (min-width: 1480px)
+    background-image: url('/common/background/background_w_1920.jpg')
+  @media (min-width: 1921px) 
+    background-image: url('/common/background/background_w_3840.jpg')
+  &::after
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    content: ''
+    background: linear-gradient(180deg, rgba(9, 51, 113, 0.78) 0%, rgba(5, 108, 40, 0.18) 100%), linear-gradient(0deg, rgba(13, 65, 24, 0.19), rgba(13, 65, 24, 0.19))
+    opacity: 0.75
+  &__inner
+    position: relative
+    padding: 50px 18px 50px 18px
+    opacity: 1
+    z-index: 1
+    @media (min-width: 1480px)
+      padding: 50px 28px 50px 28px
+  &__title
+    margin: 0
+    margin-bottom: 25px
+    font-family: 'Lato', sans-serif
+    font-size: 32px
+    font-style: normal
+    font-weight: 900
+    line-height: 38px
+    letter-spacing: 0em
+    text-align: left
+    color: $white_1
+    @media (min-width:  1480px)
+      margin-bottom: 44px
+  &__size-indicate
+    margin: 0
+    margin-bottom: 37px
+    font-family: 'Open Sans', sans-serif
+    font-size: 16px
+    font-style: normal
+    font-weight: 400
+    line-height: 24px
+    letter-spacing: 0em
+    text-align: left
+    color: $white_1
+    @media (min-width: 1480px)
+      margin-bottom: 20px
+  &__group
+    padding: 0
+    margin: 0
+    border: none
+    margin-bottom: 10px
+    @media (min-width: 1480px)
+      margin-bottom: 25px
+    &:nth-child(5)
+      margin-bottom: 62px
+      @media (min-width: 1480px)
+        margin-bottom: 67px
+  &__legend
+    margin: 0
+    margin-bottom: 9px
+    font-family: 'Lato', sans-serif
+    font-size: 14px
+    font-style: normal
+    font-weight: 900
+    line-height: 17px
+    letter-spacing: 0em
+    text-align: left
+    color: $white_1
+  &__group-inner
+    display: flex
+  &__input
+    height: 40px
+    width: 70px
+    max-width: 70px
+    font-family: 'Lato', sans-serif
+    font-size: 14px
+    font-style: normal
+    font-weight: 700
+    line-height: 17px
+    letter-spacing: 0em
+    text-align: center
+    color: $white_1
+    background: transparent
+    border: 1px solid $white_1
+    -moz-appearance: textfield
+    -webkit-appearance: textfield
+    &:not(.calculator__input_wide)
+      margin-right: 25px
+      @media (min-width: 1480px)
+        margin-right: 23px
+    &_wide
+      width: 100px
+      max-width: 100px
+      font-size: 16px
+      line-height: 19px
+  &__range-wrapper
+    flex-shrink: 0
+    width: calc(100% - 95px)
+  &__range
+    -webkit-appearance: none
+    appearance: none
+    width: 100%
+    height: 2px
+    background: transparent url('/common/calculator/line.png') round
+    background-size: contain
+    outline: none
+    opacity: 1
+    &::-webkit-slider-thumb
+      -webkit-appearance: none
+      appearance: none
+      width: 10px
+      height: 10px
+      background: $white_1
+      cursor: pointer
+      outline: none
+      border: none
+      border-radius: 50%
+    &::-moz-range-thumb
+      width: 10px
+      height: 10px
+      background: $white_1
+      cursor: pointer
+      outline: none
+      border: none
+      border-radius: 50%
+  &__input::-webkit-outer-spin-button, &__input::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0
+  &__min-middle-max
+    display: flex
+    justify-content: space-between
+    font-family: 'Lato', sans-serif
+    font-size: 12px
+    font-style: normal
+    font-weight: 400
+    line-height: 14px
+    letter-spacing: 0em
+    color: $white_1
+  &__min, &__max, &__middle
+    display: block
+    width: 33%
+  &__max
+    text-align: right
+  &__middle
+    text-align: center
+  &__field-fill
+    margin: 0
+    margin-bottom: 32px
+    font-family: 'Open Sans', sans-serif
+    font-size: 16px
+    font-style: normal
+    font-weight: 400
+    line-height: 24px
+    letter-spacing: 0em
+    text-align: left
+    color: $white_1
+    @media (min-width: 1480px)
+      margin-bottom: 25px
+  &__threesome
+    display: flex
+    justify-content: space-between
+    align-items: flex-start
+    margin: 0
+    padding: 0
+    border: none
+  &__threesome-lable
+    display: block
+    margin: 0
+    margin-bottom: 6px
+    font-family: 'Lato', sans-serif
+    font-size: 26px
+    font-style: normal
+    font-weight: 400
+    line-height: 31px
+    letter-spacing: 0em
+    text-align: center
+    color: $white_1

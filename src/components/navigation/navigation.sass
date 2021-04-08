@@ -1,0 +1,64 @@
+.navigation
+  &__prev, &__next
+    position: absolute
+    overflow: visible
+    top: calc(50% - 23px)
+    content: ''
+    margin: 0
+    padding: 0
+    width: 40px
+    height: 40px
+    color: inherit
+    font: inherit
+    line-height: normal
+    -webkit-font-smoothing: inherit
+    -moz-osx-font-smoothing: inherit
+    -webkit-appearance: none
+    background-color: $white_2
+    border: none
+    cursor: pointer
+    transform-origin: center
+    transition: border-color 180ms ease-out
+    z-index: 10
+    &:not(.navigation__prev_background_light):not(.navigation__next_background_light)
+      @media (min-width: 1024px)
+        background-color: transparent
+        &::after
+          top: 9px
+          width: 20px
+          height: 20px
+          border-right: 3px solid $black_1
+          border-bottom: 3px solid $black_1
+    &::after
+      position: absolute
+      top: 14px
+      content: ''
+      width: 10px
+      height: 10px
+      border-right: 2px solid $black_1
+      border-bottom: 2px solid $black_1
+    &:active:before, &:active:after
+      border-right: 3px solid $gray_3
+      border-bottom: 3px solid $gray_3
+  &__next
+    right: 8px
+    &_background_light
+      right: 0
+    &::after
+      right: 15px
+      transform: rotate(-45deg)
+    &:not(.navigation__next_inactive)
+      animation: slide-left 360ms ease-out
+    &_inactive
+      animation: slide-right-out forwards 360ms ease-in
+  &__prev
+    left: 8px
+    &_background_light
+      left: 0
+    &::after
+      left: 15px
+      transform: rotate(135deg)
+    &:not(.navigation__prev_inactive)
+      animation: slide-right 360ms ease-out
+    &_inactive
+      animation: slide-left-out forwards 360ms ease-in

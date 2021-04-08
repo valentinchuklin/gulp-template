@@ -1,0 +1,100 @@
+.cart-item
+  display: flex
+  position: relative
+  overflow: hidden
+  flex-wrap: wrap
+  padding: 15px 20px 15px 10px
+  @media (min-width: 768px)
+    display: block
+  &:nth-child(odd)
+    background-color: $gray_7
+  &__link
+    margin-right: 13px
+    margin-bottom: 12px
+    @media (min-width: 768px)
+      float: left
+      margin-right: 21px
+      margin-bottom: 29px
+    @media (min-width: 1480px)
+      margin-bottom: 2px
+  &__text-link
+    @media (min-width: 768px)
+      display: inline-block
+  &__img
+    width: 50px
+    height: 50px
+    @media (min-width: 768px)
+      width: 150px
+      height: 150px
+  &__trash-can
+    display: block
+    position: absolute
+    top: 12px
+    right: 13px
+    border: none
+    margin: 0
+    padding: 0
+    overflow: visible
+    background-color: transparent
+    color: inherit
+    font: inherit
+    line-height: normal
+    -webkit-font-smoothing: inherit
+    -moz-osx-font-smoothing: inherit
+    -webkit-appearance: none
+    width: 20px
+    height: 20px
+    background-image: url('/common/cart/trash-can.svg')
+    background-repeat: no-repeat
+    background-size: 15px
+    background-position: 2px 3px
+    cursor: pointer
+    &::-moz-focus-inner 
+      border: 0
+      padding: 0
+    @media (min-width: 768px)
+      top: 17px
+      right: 18px
+  &__breafly
+    padding-right: 20px
+    margin-bottom: 12px
+    flex-basis: calc( 100% - 100px - 13px )
+    @media (min-width: 768px)
+      margin-bottom: 29px
+      flex-basis: calc( 100% - 150px - 21px )
+    @media (min-width: 1480px)
+      margin-bottom: 2px
+      max-width: 400px
+  &__title
+    margin-bottom: 6px
+  &__numbers
+    display: flex
+    justify-content: space-between
+    flex-wrap: wrap
+    width: 100%
+    @media (min-width: 768px)
+      display: block
+      text-align: right
+      width: auto
+  &__msqr, &__lfm, &__price
+    flex-basis: 33%
+    flex-shrink: 0
+    @media (min-width: 768px)
+      display: inline-block
+  &__msqr
+    text-align: left
+    @media (min-width: 768px)
+      margin-right: 100px
+    @media (min-width: 1480px)
+      margin-right: 70px
+  &__lfm
+    text-align: center
+    @media (min-width: 768px)
+      margin-right: 100px
+    @media (min-width: 1480px)
+      margin-right: 70px
+  &__price
+    text-align: right  
+  &__numeral-about
+    flex-basis: 100%
+    text-align: right

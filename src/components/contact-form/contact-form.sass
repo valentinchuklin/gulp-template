@@ -1,0 +1,150 @@
+.contact-form
+  display: block
+  width: 100%
+  max-width: 1075px
+  break-inside: avoid
+  page-break-inside: avoid
+  @media print
+    display: none
+  &__fieldset
+    padding: 0
+    margin: 0
+    border: none
+    @media (min-width: 768px)
+      display: flex
+      flex-wrap: wrap
+      align-items: flex-start
+      justify-content: flex-start
+    @media (min-width: 1480px)
+      justify-content: space-between
+  &__legend
+    display: block
+    margin-bottom: 40px
+    font-family: 'Lato', sans-serif
+    font-style: normal
+    font-weight: 900
+    font-size: 24px
+    line-height: 29px
+    text-align: left
+    color: $gray_1
+    @media (min-width: 768px)
+      margin-bottom: 22px
+      font-size: 32px
+      line-height: 38px
+  &__label
+    display: block
+    position: relative
+    overflow: hidden
+    margin-bottom: 20px
+    padding: 6px 13px 18px 51px
+    font-family: 'Open Sans', sans-serif
+    font-style: normal
+    font-weight: normal
+    font-size: 12px
+    line-height: 16px
+    color: $gray_3
+    background-color: transparent
+    &_input
+      height: 60px
+      @media (min-width: 768px)
+        flex-basis: 345px
+        flex-grow: 0
+        flex-shrink: 0
+        &:nth-child(2n)
+          margin-right: 30px
+          @media (min-width: 1480px)
+            margin-right: unset
+      @media (min-width: 1480px)
+        flex-grow: 0
+    &::before
+      position: absolute
+      top: 11px
+      left: 12px
+      content: ''
+      width: 30px
+      height: 30px
+      background-color: $green_1
+      mask-repeat: no-repeat
+      mask-size: 30px 30px
+      mask-position: top left
+    &_textarea
+      height: 30vh
+      @media (min-height: 640px)
+        height: 200px
+      @media (min-width: 768px)
+        flex-basis: 100%
+        flex-shrink: 0
+      &::before
+        mask-image: url('/common/icons/message.svg')
+    &_e-mail
+      font-size: 0
+      color: transparent
+      &::before
+        top: 13px
+        mask-image: url('/common/icons/envelop.svg')
+    &_phone
+      font-size: 0
+      color: transparent
+      &::before
+        top: 13px
+        mask-image: url('/common/icons/phone.svg')
+    &_locality
+       &::before
+        top: 13px
+        mask-image: url('/common/icons/pointer.svg')
+    &_address
+      font-size: 0
+      color: transparent
+      height: 100px
+      @media (min-width: 768px)
+        height: 60px
+        flex-basis: 100%
+      @media (min-width: 1480px)
+        flex-basis: 710px
+      &::before
+        top: 13px
+        mask-image: url('/common/icons/pointer.svg')
+    &_name::before
+      mask-image: url('/common/icons/person.svg')
+    &_error
+      &::before
+        background-color: $red_1
+      input 
+        border-color: $red_1
+  &__input, &__textarea
+    display: block
+    width: 100%
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    font-family: 'Open Sans', sans-serif
+    font-size: 16px
+    font-style: normal
+    font-weight: 400
+    letter-spacing: 0em
+    text-align: left
+    line-height: 24px
+    color: $gray_1
+    border: 1px $gray_3 solid
+    background-color: transparent
+    &::placeholder
+      font-family: 'Open Sans', sans-serif
+      font-size: 16px
+      font-style: normal
+      font-weight: 400
+      letter-spacing: 0em
+      text-align: left
+      color: $gray_3
+  &__textarea
+    display: block
+    height: 100%
+    overflow: auto
+    padding: 18px 13px 18px 50px
+    resize: none
+  &__input
+    padding: 0 13px 0 50px
+    height: 60px
+
+

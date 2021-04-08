@@ -1,0 +1,199 @@
+.select
+  display: inline-block
+  position: relative
+  max-width: 100%
+  &__lable
+    display: inline-block
+    padding: 7px 20px 7px 3px
+    max-width: 100%
+    min-width: 141px
+    font-family: 'Open Sans', sans-serif
+    font-size: 16px
+    font-style: normal
+    font-weight: 400
+    line-height: 24px
+    text-align: left
+    color: $gray_2
+    background-color: transparent
+    border: none
+    border-bottom: 1px solid $gray_2
+    cursor: pointer
+    -moz-appearance: none
+    -webkit-appearance: none
+    appearance: none
+    transition: color 180ms ease-out, border-color 180ms ease-out
+    &:-ms-expand 
+      display: none
+    &::after
+      position: absolute
+      top: 18px
+      right: 4px
+      content: ''
+      width: 5px
+      height: 5px
+      border-right: 1px solid $gray_2
+      border-bottom: 1px solid $gray_2
+      transform-origin: top right
+      transform: rotate(45deg)
+      transition: border-color 1880ms ease-out
+    &:hover, &:active
+      color: $gray_3
+      border-color: $gray_3
+      &::after
+        border-color: $gray_3
+  &__list 
+    display: none
+    position: absolute
+    right: 0
+    left: 0
+    max-height: 640px
+    overflow: hidden
+    margin: 0
+    padding: 0
+    border: 1px solid $gray_5
+    list-style-type: none
+    opacity: 0
+    pointer-events: none
+    background-color: $white_1
+    z-index: 3
+    &_opened
+      display: block
+      opacity: 1
+      pointer-events: auto
+      animation: scale-y 180ms ease-out
+    &_top
+      bottom: 39px
+      &.select__list_opened
+        animation: scale-y-b 180ms ease-out
+  &__item
+    display: block
+    overflow: hidden
+    margin: 0
+    padding: 7px
+    width: 100%
+    font-family: 'Open Sans', sans-serif
+    font-weight: normal
+    font-size: 18px
+    line-height: 24px
+    cursor: pointer
+    transition: 120ms ease-out background-color, 120ms ease-out color
+    color: inherit
+    text-align: left
+    background-color: $white_1
+    border: none
+    -webkit-font-smoothing: inherit
+    -moz-osx-font-smoothing: inherit
+    -webkit-appearance: none
+    &::-moz-focus-inner 
+      border: 0
+      padding: 0
+    &:nth-child(2n)
+      background-color: $gray_7
+    &:hover, &:active
+      background-color: $gray_5
+    &:active
+      color: $gray_3
+  &_multiple
+    .select__lable
+      font-size: 14px
+      min-width: 160px
+      @media (min-width: 768px)
+        font-size: 16px
+        min-width: 200px
+      @media (min-width: 1480px)
+        font-size: 18px
+        min-width: 240px
+    .select__counter
+      position: absolute
+      top: -12px
+      right: -10px
+      content: ''
+      padding: 0 5px
+      min-width: 20px
+      height: 20px
+      border-radius: 10px
+      background-color: $gray_5
+      color: $gray_2
+      text-align: center
+      line-height: 20px
+      font-size: 12px
+      font-family: 'Open Sans', sans-serif
+      animation: fade-in 180ms ease-out
+    .select__item
+      position: relative
+      &::after
+        position: absolute
+        top: 10px
+        right: 7px
+        content: ''
+        width: 14px
+        height: 14px
+        border: 1px solid $gray_4
+      &::before
+        position: absolute
+        top: 12px
+        right: 7px
+        content: ''
+        width: 6px
+        height: 10px
+        border-right: 1px solid transparent
+        border-bottom: 1px solid transparent
+        transform-origin: top right
+        transform: rotate(45deg)
+        transition: border-color 180ms ease-out
+      &_selected::before        
+        border-right: 1px solid $gray_2
+        border-bottom: 1px solid $gray_2
+      &_clear::after, &_clear::before
+        display: none
+  &_border_360
+    .select__lable
+      border: 1px solid $gray_4
+      padding: 17px 20px 17px 14px
+      min-width: 222px
+      &::after
+        top: 28px
+        right: 14px
+    .select__item
+      padding: 7px 14px
+  &_underline_deshed
+    min-width: 140px
+    .select__lable
+      border: none
+      padding: 7px 20px 7px 14px
+      min-width: 124px
+      font-family: 'Lato', sans-serif
+      font-size: 16px
+      font-style: normal
+      font-weight: 400
+      line-height: 24px
+      letter-spacing: 0em
+      text-align: center
+      color: $gray_3
+      &::after
+        top: 19px
+        right: 0
+        width: 8px
+        height: 8px
+        border-color: $gray_3
+      &::before
+        position: absolute
+        content: ''
+        bottom: 4px
+        left: 14px
+        right: 16px
+        height: 1px
+        border-bottom: 1px $gray_3 dashed
+    .select__list
+      border: none
+    .select__item
+      padding: 7px 20px 7px 14px
+      font-family: 'Lato', sans-serif
+      font-size: 16px
+      font-style: normal
+      font-weight: 400
+      line-height: 24px
+      letter-spacing: 0em
+      text-align: center
+      color: $gray_3
+      border-top: none

@@ -1,5 +1,5 @@
 
-/*БАЗОВЫЕ ПАРАМЕТРЫ ДОКУМЕНТА И ТИПОГРАФИКА
+//БАЗОВЫЕ ПАРАМЕТРЫ ДОКУМЕНТА И ТИПОГРАФИКА
 //Размеры элементов включают в себя краницы и поля
 *
   box-sizing: border-box
@@ -12,10 +12,8 @@ body
   font-size: 16px
   line-height: 2
   color: $dark
-  @media (min-width: 768px)
-    font-size: 16px
 //Убираем аутлайн у элементов, не сфокусированных явно с клавиатуры
-::focus:not(:focus-visible)
+*:focus:not(:focus-visible)
   outline: none
 // Remove border and padding in Firefox
 ::-moz-focus-outer, ::-moz-focus-inner
@@ -25,6 +23,17 @@ body
 picture, img
   display: block
   overflow: hidden
+//Борюсь со стилями Apple
+input
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  border-radius: none
+//Убираю стрелки у input number
+input[type='number']
+  -moz-appearance:textfield
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button
+  -webkit-appearance: none
 //Визуально скрытые элементы
 .visually-hidden:not(:focus):not(:active)
   position: absolute
@@ -45,17 +54,17 @@ picture, img
   width: auto
   overflow: visible
   background-color: transparent
-  /* inherit font & color from ancestor */
+  // inherit font & color from ancestor 
   color: inherit
   font: inherit
-  /* Normalize line-height. Cannot be changed from normal in Firefox 4+. */
+  // Normalize line-height. Cannot be changed from normal in Firefox 4+. 
   line-height: normal
-  /* Corrects font smoothing for webkit */
+  // Corrects font smoothing for webkit 
   -webkit-font-smoothing: inherit
   -moz-osx-font-smoothing: inherit
-  /* Corrects inability to style clickable input types in iOS */
+  // Corrects inability to style clickable input types in iOS 
   -webkit-appearance: none
-/* Remove excess padding and border in Firefox 4+ */
+// Remove excess padding and border in Firefox 4+ 
 .reset-button::-moz-focus-inner 
   border: 0
   padding: 0

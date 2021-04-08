@@ -1,0 +1,55 @@
+.close-button
+  display: block
+  position: absolute
+  top: 8px
+  right: 14px
+  margin: 0
+  padding: 0
+  overflow: visible
+  background-color: transparent
+  color: inherit
+  font: inherit
+  line-height: normal
+  -webkit-font-smoothing: inherit
+  -moz-osx-font-smoothing: inherit
+  -webkit-appearance: none
+  width: 21px
+  height: 21px
+  cursor: pointer
+  border: none
+  &::-moz-focus-inner 
+    border: 0
+    padding: 0
+  &::before
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    content: ''
+    mask-image: url('/common/icons/cross.svg')
+    mask-repeat: no-repeat
+    mask-size: contain
+    mask-position: center
+    background-color: $gray_1
+    transition: background-color 180ms ease-out
+    z-index: 1
+  &:active:before
+    background-color: $gray_4
+  @media (min-width: 768px)
+    top: 14px
+  &_background_light
+    top: 8px
+    right: 8px
+    width: 40px
+    height: 40px
+    background-color: $white_2
+    @media (min-width: 1024px)
+      background-color: transparent
+    &::before
+      top: 12px
+      right: 12px
+      bottom: 12px
+      left: 12px
+    &:hover:before, &:active:before
+      color: $gray_3

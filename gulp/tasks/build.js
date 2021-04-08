@@ -1,12 +1,12 @@
 const gulp = require('gulp');
-const GulpClean = require('gulp-clean'); //Очистка
+const gulpClean = require('gulp-clean'); //Очистка
 const replace = require('gulp-replace'); //Замена
 const rename = require('gulp-rename'); //Переименование
 
 //Очистка папки build перед заданием
 const buildCleanFunction = function () {
   return gulp.src('./build/*', { read: false })
-    .pipe(GulpClean());
+    .pipe(gulpClean());
 }
 
 //Pug2html
@@ -21,10 +21,10 @@ const pugfunction = function pug2html(cb) {
     preserveLineBreaks: true
   }
   var cacheTimeStamp = new Date().getTime();
-  return gulp.src(['./src/**/index.pug'])
+  return gulp.src(['./src/**/index.pug', '!./src/components/**', '!./src/third-party/**'])
     .pipe(pug())
-    .pipe(replace('custom-style.css', 'custom-style-min.css?t=' + cacheTimeStamp))
-    .pipe(replace('custom-script.js', 'custom-script-min.js?t=' + cacheTimeStamp))
+    .pipe(replace('style.css', 'style-min.css?t=' + cacheTimeStamp))
+    .pipe(replace('script.js', 'script-min.js?t=' + cacheTimeStamp))
     .pipe(htmlmin(htmlminOptions))
     .pipe(gulp.dest('./build/'));
 }
@@ -43,7 +43,7 @@ const sassfunction = function () {
       sort: 'mobile-first'
     })
   ]
-  return gulp.src('src/**/custom-style.sass')
+  return gulp.src(['!./src/components/**', '!./src/third-party/**', './src/**/style.sass'])
     .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
     .pipe(postcss(processors))
     .pipe(cssmin())
@@ -52,35 +52,35 @@ const sassfunction = function () {
 }
 
 //JS function
-//Функция сборщик скриптов страницы из build-script.pug в custom-script.js, если требуется
+//Функция сборщик скриптов страницы из build-script.pug в script.js, если требуется
 const buildCustomStyle = function(){
-  return gulp.src('./src/**/build-script.pug')
+  return gulp.src(['./src/**/build-script.pug', '!./src/components/**', '!./src/third-party/**'])
   .pipe(pug())
   .pipe(rename(function(path){
-    path.basename = 'custom-script';
+    path.basename = 'script';
     path.extname = '.js'
   }))
   .pipe(minify())
   .pipe(gulp.dest('./build/'));
 }
 const minify = require('gulp-minify');
-//Если скрипт небольшой минуем этап сборки и пишем сразу в custom-script.js
+//Если скрипт небольшой минуем этап сборки и пишем сразу в script.js
 const jsMinFunction = function () {
-  return gulp.src(['./src/**/custom-script.js', '!./src/**/includes/**/*', '!./src/third-party/**/*'])
+  return gulp.src(['./src/**/script.js', '!./src/components/**', '!./src/third-party/**'])
     .pipe(minify())
     .pipe(gulp.dest('./build/'));
 }
 //Удаляем жирный JS
 const cleanJsFunction = function() {
-  return gulp.src(['./build/**/custom-script.js'], { read: false })
-    .pipe(GulpClean());
+  return gulp.src(['./build/**/script.js'], { read: false })
+    .pipe(gulpClean());
 }
 //Создаём серию
 const jsfunction = gulp.series(buildCustomStyle, jsMinFunction, cleanJsFunction);
 
 //PHP function
 const phpfunction = function () {
-  return gulp.src(['./src/**/*.php', '!./src/**/includes/**/*', '!./src/third-party/**/*'])
+  return gulp.src(['./src/**/*.php', '!./src/components/**', '!./src/third-party/**'])
     .pipe(gulp.dest('./build/'));
 }
 //Оптимизация и копирование картинок
@@ -89,7 +89,7 @@ const imgCompress = require('imagemin-jpeg-recompress');
 const cache = require('gulp-cache');
 
 const imgMinFunction = function () {
-  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/**/includes/**/*'])
+  return gulp.src(['./src/**/*.svg', './src/**/*.jpg', './src/**/*.png', './src/**/*.gif', '!./src/components/**', '!./src/third-party/**'])
     .pipe(
       cache(
         imagemin([
@@ -109,11 +109,9 @@ const imgMinFunction = function () {
 }
 const webp = require('gulp-webp');
 const webpFunction = function(input, output) {
-  var input = ['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', '!src/browser-old/**/*.*'];
-  var output = 'build/';
-  return gulp.src(input)
+  return gulp.src(['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', '!./src/components/**', '!./src/third-party/**'])
     .pipe(webp())
-    .pipe(gulp.dest(output));
+    .pipe(gulp.dest('build/'));
 }
 const imgfunction = gulp.series(imgMinFunction, webpFunction);
 //Копирование шрифтов
@@ -123,7 +121,7 @@ const copyfontsfunction = function () {
 }
 //Копирование сторонних скриптов
 const copyThirdPartyFunction = function () {
-  return gulp.src('./src/third-party/**/*')
+  return gulp.src('./src/third-party/**')
     .pipe(gulp.dest('./build/third-party/'));
 }
 

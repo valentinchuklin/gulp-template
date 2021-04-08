@@ -1,0 +1,30 @@
+.breadcrumbs
+  display: block
+  &__link
+    display: inline-block
+    position: relative
+    font-family: Lato
+    font-size: 14px
+    font-style: normal
+    font-weight: 400
+    line-height: 17px
+    text-align: left
+    text-decoration: none
+    color: $white_1
+    transition: color ease-out 180ms
+    &:hover, &:active
+      color: $gray_8
+    &:not(:last-child)
+      margin-right: 5px
+    &:not(:first-child)
+      padding-left: 11px
+      @media (min-width: 768px)
+        padding-left: 15px
+      &:before
+        position: absolute
+        top: 0
+        left: 0
+        content: '>'
+    @media (min-width: 768px)
+      font-size: 18px
+      line-height: 22px

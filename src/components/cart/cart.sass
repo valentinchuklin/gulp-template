@@ -1,0 +1,86 @@
+.cart
+  display: block
+  position: fixed
+  top: 76px
+  right: 0
+  text-decoration: none
+  width: 82px
+  height: 64px
+  background-color: rgba(255, 255, 255, .15)
+  z-index: 1
+  cursor: pointer
+  transition: background-color 360ms ease-out
+  &::after
+    position: absolute
+    content: ''
+    top: 18px
+    right: 31px
+    width: 32px
+    height: 32px
+    background-color: $white_1
+    mask-image: url('/common/cart/cart.svg')
+    mask-repeat: no-repeat
+    mask-size: 32px
+    mask-position: center
+    transition: background-color 360ms ease-out
+  &_on-white
+    background-color: $white_1
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15)
+    &::after
+      background-color: $gray_1
+  &__lable
+    display: none
+  &__counter
+    display: block
+    position: absolute
+    top: 10px
+    right: 15px
+    content: ''
+    width: 20px
+    height: 20px
+    border-radius: 50%
+    background-color: $red_1
+    color: $white_1
+    font-family: 'Lato', sans-serif
+    font-size: 10px
+    font-style: normal
+    font-weight: 700
+    line-height: 20px
+    letter-spacing: 0em
+    text-align: center
+    z-index: 2
+    transition: opacity 360ms ease-in-out
+    &_empty
+      opacity: 0
+@media (min-width: 1900px)
+  .hero
+    .cart
+      display: flex
+      align-items: center
+      padding-right: 100px
+      padding-left: 50px
+      width: 277px
+      height: 64px
+      transform-origin: right bottom
+      transform: rotate(-90deg)
+      background: $white_1
+      &::after
+        background-color: $gray_1
+        right: 57px
+      &__lable
+        display: block
+        text-decoration: none
+        font-family: 'Lato', sans-serif
+        font-size: 18px
+        font-style: normal
+        font-weight: 400
+        line-height: 1
+        letter-spacing: 0em
+        text-align: left
+        color: $gray_1
+        text-transform: uppercase
+      &__counter
+        top: 10px
+        right: 42px
+
+  

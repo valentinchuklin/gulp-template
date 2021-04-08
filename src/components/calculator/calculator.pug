@@ -1,0 +1,45 @@
+form.calculator#calculator
+  .calculator__inner
+    p.calculator__title Taschenrechner
+    p.calculator__size-indicate Bitte Maße in mm angeben:
+    fieldset.calculator__group
+      legend.calculator__legend Dicke, mm
+      .calculator__group-inner
+        input.calculator__input(type="number" id="calcThicknessNumber" value="25")
+        .calculator__range-wrapper
+          input.calculator__range(type="range" min="0" max="50" value="25" id="calcThicknessRange")
+          .calculator__min-middle-max
+            span.calculator__min 0
+            span.calculator__middle 25
+            span.calculator__max 50
+    fieldset.calculator__group 
+      legend.calculator__legend Breite, mm
+      .calculator__group-inner
+        input.calculator__input(type="number" id="calcWidthNumber" value="125")
+        .calculator__range-wrapper
+          input.calculator__range(type="range" min="0" max="250" value="125" id="calcWidthRange")
+          .calculator__min-middle-max
+            span.calculator__min 0
+            span.calculator__middle 125
+            span.calculator__max 250
+    fieldset.calculator__group 
+      legend.calculator__legend Länge, mm
+      .calculator__group-inner
+        input.calculator__input(type="number" id="calcLengthNumber" value="3000")
+        .calculator__range-wrapper
+          input.calculator__range(type="range" min="0" max="6000" value="3000" id="calcLengthRange")
+          .calculator__min-middle-max
+            span.calculator__min 0
+            span.calculator__middle 3000
+            span.calculator__max 6000
+    p.calculator__field-fill Füllen Sie eines der Felder aus - der Rest der Einheiten wird automatisch berechnet:
+    fieldset.calculator__threesome
+      .calculator__threesome-group
+        span.calculator__threesome-lable m<sup>3</sup>
+        input.calculator__input.calculator__input_wide(type="number" id="calcM3" value="25.0256")
+      .calculator__threesome-group
+        span.calculator__threesome-lable m<sup>2</sup>
+        input.calculator__input.calculator__input_wide(type="number" id="calcM2" value="25.0256")
+      .calculator__threesome-group
+        span.calculator__threesome-lable int
+        input.calculator__input.calculator__input_wide(type="number" id="calcInt" value="25.0256")
