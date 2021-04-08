@@ -1,5 +1,5 @@
 
-/*БАЗОВЫЕ ПАРАМЕТРЫ ДОКУМЕНТА
+/*БАЗОВЫЕ ПАРАМЕТРЫ ДОКУМЕНТА И ТИПОГРАФИКА
 //Размеры элементов включают в себя краницы и поля
 *
   box-sizing: border-box
@@ -13,3 +13,49 @@
 // Плавный скролл, если поддерживается
 .html
   scroll-behavior: smooth
+//Предпочитаю, чтобы все picture сразу принимали размеры содержимого, а у img отсутствовал margin
+body
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif
+  font-weight: 400
+  font-size: 16px
+  line-height: 2
+  color: $dark
+  @media (min-width: 768px)
+    font-size: 16px
+picture, img
+  display: block
+  overflow: hidden
+//Визуально скрытые элементы
+.visually-hidden:not(:focus):not(:active)
+  position: absolute
+  width: 1px
+  height: 1px
+  margin: -1px
+  border: 0
+  padding: 0
+  white-space: nowrap
+  clip-path: inset(100%)
+  clip: rect(0 0 0 0)
+  overflow: hidden
+//СБРОС СТИЛЕЙ БРАУЗЕРОВ, ПРИ НЕОБХОДИМОСТИ
+.reset-button 
+  border: none
+  margin: 0
+  padding: 0
+  width: auto
+  overflow: visible
+  background-color: transparent
+  /* inherit font & color from ancestor */
+  color: inherit
+  font: inherit
+  /* Normalize line-height. Cannot be changed from normal in Firefox 4+. */
+  line-height: normal
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit
+  -moz-osx-font-smoothing: inherit
+  /* Corrects inability to style clickable input types in iOS */
+  -webkit-appearance: none
+/* Remove excess padding and border in Firefox 4+ */
+.reset-button::-moz-focus-inner 
+  border: 0
+  padding: 0
