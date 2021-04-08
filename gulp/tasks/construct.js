@@ -55,7 +55,7 @@ const sassfunction = function () {
       sort: 'mobile-first'
     })
   ]
-  return gulp.src(['./src/**/style.sass','!./src/components/**', '!./src/third-party/**'])
+  return gulp.src(['./src/**/style.sass', '!./src/components/**', '!./src/third-party/**'])
     .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
     .pipe(postcss(processors))
     .pipe(gulp.dest('./dev-build/'))
@@ -68,15 +68,15 @@ const watchsasschanges = function () {
 
 //JS function
 //Функция сборщик скриптов страницы из build-script.pug в script.js, если требуется
-const buildCustomStyle = function(){
+const buildCustomStyle = function () {
   return gulp.src(['./src/**/build-script.pug', '!./src/components/**', '!./src/third-party/**'])
-  .pipe(pug())
-  .pipe(rename(function(path){
-    path.basename = 'script';
-    path.extname = '.js'
-  }))
-  .pipe(gulp.dest('./dev-build/'))
-  .pipe(browsersync.stream());
+    .pipe(pug())
+    .pipe(rename(function (path) {
+      path.basename = 'script';
+      path.extname = '.js'
+    }))
+    .pipe(gulp.dest('./dev-build/'))
+    .pipe(browsersync.stream());
 }
 //Если скрипт небольшой минуем этап сборки и пишем сразу в script.js
 const jsMinFunction = function () {
@@ -125,7 +125,7 @@ const imgMinFunction = function () {
     .pipe(browsersync.stream());
 }
 const webp = require('gulp-webp');
-const webpFunction = function(input, output) {
+const webpFunction = function (input, output) {
   return gulp.src(['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', '!./src/components/**', '!./src/third-party/**'])
     .pipe(webp())
     .pipe(gulp.dest('dev-build/'));
