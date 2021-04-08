@@ -13,8 +13,14 @@ module.exports.cleanBuilds = cleanBuilds;
 //ЛАБОРАТОРИЯ
 const makeSvgSymbolSprite = require('./gulp/tasks/makeSvgSymbolSprite');
 const convertToWebp = require('./gulp/tasks/convertToWebp');
+const exportComponent = require('./gulp/tasks/exportComponent');
+const cleanExport = require('./gulp/tasks/cleanExport');
 
 //Конвертировать в webp в лаборатории
 module.exports.convertToWebp = convertToWebp;
 //Создание SVG symbol спрайтов
 module.exports.makeSvgSymbolSprite = makeSvgSymbolSprite;
+//Экспорт и компиляция модулей
+module.exports.exportComponent = exportComponent;
+//Очистка экспорта
+module.exports.cleanExport = cleanExport;
