@@ -1,6 +1,6 @@
 //- Базовый шаблон сайта
 <!DOCTYPE html>
-html.html(lang="ru")
+html(lang="ru")
   head
     block head__meta
       //- Метатеги
@@ -25,24 +25,25 @@ html.html(lang="ru")
       //- link(rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5")
       //- meta(name="msapplication-TileColor" content="#00aba9")
       //- meta(name="theme-color" content="#ffffff")  
-    block head__styles
+    block head__thirdparty-styles
       //
-      //СТОРОНИИЕ СТИЛИ
+      //СТОРОННИЕ СТИЛИ
       //
       //Normalize.css
       link(rel="preload" href="/third-party/normalize.css/normalize.css" as="style")
       link(rel="stylesheet" href="/third-party/normalize.css/normalize.css")
+    block head__common-styles
       //
       //ОБЩИЕ СТИЛИ (ИСП. НА КАЖДОЙ СТРАНИЦЕ)
       //
       link(rel="preload" href="/common/custom-style.css" as="style")
       link(rel="stylesheet" href="/common/custom-style.css")
     block head__page-styles
-      //
-      //СТИЛЬ ТЕКУЩЕЙ СТРАНИЦЫ
-      //
+      //- //
+      //- //СТИЛЬ ТЕКУЩЕЙ СТРАНИЦЫ
+      //- //
   block body
-    body.body
+    body
       //- Тело сайта
       block header
         //- Шапка сайта
@@ -57,7 +58,3 @@ html.html(lang="ru")
         //
         //ПОДКЛЮЧЕНИЕ СКРИПТОВ
         //
-        //Скрипт управления фокусом модальных окон (необходим для работы меню и модальных окон)
-        script(src="/third-party/focus-manager/focusManager.min.js" defer)
-        //Катомные скрипты главной страницы
-        script(src="/common/custom-script.js" defer)
