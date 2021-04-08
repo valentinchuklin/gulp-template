@@ -95,8 +95,8 @@ const imgMinFunction = function () {
         imagemin([
           imgCompress({
             loops: 4,
-            min: 75,
-            max: 80,
+            min: 70,
+            max: 75,
             quality: 'high'
           }),
           imagemin.gifsicle(),
