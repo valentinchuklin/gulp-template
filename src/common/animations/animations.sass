@@ -1,25 +1,52 @@
 @keyframes slide-left
   0%
-    transform: translateX(100vw)
+    transform: translateX(100%)
   100%
     transform: translate(0, 0)
+@keyframes slide-left-out
+  0%
+    transform: translate(0, 0)
+  100%
+    transform: translateX(-100%)
 @keyframes slide-right
   0%
-    transform: translateX(-100vw)
+    transform: translateX(-100%)
   100%
     transform: translate(0, 0)
+@keyframes slide-right-out
+  0%
+    transform: translate(0, 0)
+  100%
+    transform: translateX(100%)
 @keyframes slide-down
   0%
-    transform: translateY(-100vh)
-  100%
     transform: translate(0, 0)
+  100%
+    transform: translateY(100%)
+@keyframes slide-down-out
+  100%
+    transform: translateY(100%)
 @keyframes slide-up
   0%
-    transform: translate(0, 0)
+    transform: translateY(100%)
   100%
-    transform: translateY(-100vh)
+    transform: translateY(0)
 @keyframes fade-in
   0%
     opacity: 0
   100%
     opacity: 1
+@keyframes scale-y
+  0%
+    transform-origin: left top
+    transform: scale(1 ,0)
+  100%
+    transform-origin: left top
+    transform: scale(1, 1)
+@keyframes scale-y-b
+  0%
+    transform-origin: left bottom
+    transform: scale(1 ,0)
+  100%
+    transform-origin: left top
+    transform: scale(1, 1)
