@@ -17,6 +17,8 @@ const liveserver = function bsync() {
 const pug = require('gulp-pug');
 const htmlBeautify = require('gulp-html-beautify');
 const htmlmin = require('gulp-htmlmin');
+const posthtml = require('gulp-posthtml')
+const posthtmlWebpWidthSizes = require('../posthtml/posthtmlWebpWidthSizes');
 
 const pugfunction = function pug2html(cb) {
   var htmlBeautifyOptions = {
@@ -29,6 +31,7 @@ const pugfunction = function pug2html(cb) {
   var cacheTimeStamp = new Date().getTime();
   return gulp.src(['./src/**/index.pug', '!./src/components/**', '!./src/third-party/**'])
     .pipe(pug())
+    .pipe(posthtml([posthtmlWebpWidthSizes()]))
     .pipe(replace('style.css', 'style.css?t=' + cacheTimeStamp))
     .pipe(replace('script.js', 'script.js?t=' + cacheTimeStamp))
     .pipe(htmlmin(htmlminOptions))
