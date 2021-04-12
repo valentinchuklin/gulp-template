@@ -9,8 +9,8 @@ const buildCleanFunction = function () {
     .pipe(gulpClean());
 }
 
-//Pug2html
-const pug = require('gulp-pug');
+//2html
+const rigger = require('gulp-rigger')
 const htmlmin = require('gulp-htmlmin');
 const posthtml = require('gulp-posthtml')
 const posthtmlWebpWidthSizes = require('../posthtml/posthtmlWebpWidthSizes');
@@ -21,19 +21,17 @@ const htmlminOptions = {
   collapseBooleanAttributes: true,
   preserveLineBreaks: true
 }
-const pugfunction = function pug2html(cb) {
+const htmlfunction = function pug2html(cb) {
   var cacheTimeStamp = new Date().getTime();
-  return gulp.src(['./src/**/index.pug', '!./src/components/**', '!./src/third-party/**'])
-    .pipe(pug())
+  return gulp.src(['./src/**/index.html', '!./src/components/**', '!./src/third-party/**'])
+    .pipe(rigger())
     .pipe(posthtml([posthtmlWebpWidthSizes()]))
     .pipe(replace('style.css', 'style-min.css?t=' + cacheTimeStamp))
     .pipe(replace('script.js', 'script-min.js?t=' + cacheTimeStamp))
     .pipe(htmlmin(htmlminOptions))
     .pipe(gulp.dest('./build/'));
 }
-//Sass function
-const sass = require('gulp-sass')
-sass.compiler = require('node-sass')
+//CSS function
 const autoprefixer = require('autoprefixer')
 const postcss = require('gulp-postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')
@@ -45,9 +43,9 @@ const processors = [
   })
 ]
 
-const sassfunction = function () {
-  return gulp.src(['./src/**/style.sass', '!./src/components/**', '!./src/third-party/**'])
-    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
+const cssfunction = function () {
+  return gulp.src(['./src/**/style.css', '!./src/components/**', '!./src/third-party/**'])
+    .pipe(rigger())
     .pipe(postcss(processors))
     .pipe(cssmin())
     .pipe(rename(function(path){path.basename += "-min"}))
@@ -57,7 +55,7 @@ const sassfunction = function () {
 //JS function
 //Функция сборщик скриптов страницы из build-script.pug в script.js, если требуется
 const buildCustomStyle = function(){
-  return gulp.src(['./src/**/build-script.pug', '!./src/components/**', '!./src/third-party/**'])
+  return gulp.src(['./src/**/build-script.js', '!./src/components/**', '!./src/third-party/**'])
   .pipe(pug())
   .pipe(rename(function(path){
     path.basename = 'script';
@@ -140,6 +138,6 @@ const liveserver = function bsync() {
 }
 
 //Final task
-const build = gulp.series(buildCleanFunction, pugfunction, sassfunction, jsfunction, phpfunction, imgfunction, copyfontsfunction, copyThirdPartyFunction, liveserver)
+const build = gulp.series(buildCleanFunction, htmlfunction, cssfunction, jsfunction, phpfunction, imgfunction, copyfontsfunction, copyThirdPartyFunction, liveserver)
 
 module.exports = gulp.series(build)
