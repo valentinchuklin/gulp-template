@@ -10,9 +10,9 @@ const buildCleanFunction = function () {
 }
 
 //2html
-const rigger = require('gulp-rigger')
+const fileinclude = require('gulp-file-include');
 const htmlmin = require('gulp-htmlmin');
-const posthtml = require('gulp-posthtml')
+const posthtml = require('gulp-posthtml');
 const posthtmlWebpWidthSizes = require('../posthtml/posthtmlWebpWidthSizes');
 const htmlminOptions = {
   collapseWhitespace: true,
@@ -24,7 +24,10 @@ const htmlminOptions = {
 const htmlfunction = function pug2html(cb) {
   var cacheTimeStamp = new Date().getTime();
   return gulp.src(['./src/**/index.html', '!./src/components/**', '!./src/third-party/**'])
-    .pipe(rigger())
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
     .pipe(posthtml([posthtmlWebpWidthSizes()]))
     .pipe(replace('style.css', 'style-min.css?t=' + cacheTimeStamp))
     .pipe(replace('script.js', 'script-min.js?t=' + cacheTimeStamp))
@@ -45,24 +48,30 @@ const processors = [
 
 const cssfunction = function () {
   return gulp.src(['./src/**/style.css', '!./src/components/**', '!./src/third-party/**'])
-    .pipe(rigger())
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
     .pipe(postcss(processors))
     .pipe(cssmin())
-    .pipe(rename(function(path){path.basename += "-min"}))
+    .pipe(rename(function (path) { path.basename += "-min" }))
     .pipe(gulp.dest('./build/'));
 }
 
 //JS function
 //Функция сборщик скриптов страницы из build-script.pug в script.js, если требуется
-const buildCustomStyle = function(){
+const buildCustomStyle = function () {
   return gulp.src(['./src/**/build-script.js', '!./src/components/**', '!./src/third-party/**'])
-  .pipe(pug())
-  .pipe(rename(function(path){
-    path.basename = 'script';
-    path.extname = '.js'
-  }))
-  .pipe(minify())
-  .pipe(gulp.dest('./build/'));
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
+    .pipe(rename(function (path) {
+      path.basename = 'script';
+      path.extname = '.js'
+    }))
+    .pipe(minify())
+    .pipe(gulp.dest('./build/'));
 }
 const minify = require('gulp-minify');
 //Если скрипт небольшой минуем этап сборки и пишем сразу в script.js
@@ -72,7 +81,7 @@ const jsMinFunction = function () {
     .pipe(gulp.dest('./build/'));
 }
 //Удаляем жирный JS
-const cleanJsFunction = function() {
+const cleanJsFunction = function () {
   return gulp.src(['./build/**/script.js'], { read: false })
     .pipe(gulpClean());
 }
@@ -109,7 +118,7 @@ const imgMinFunction = function () {
     .pipe(gulp.dest('build/'));
 }
 const webp = require('gulp-webp');
-const webpFunction = function(input, output) {
+const webpFunction = function (input, output) {
   return gulp.src(['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', '!./src/components/**', '!./src/third-party/**'])
     .pipe(webp())
     .pipe(gulp.dest('build/'));
@@ -138,6 +147,6 @@ const liveserver = function bsync() {
 }
 
 //Final task
-const build = gulp.series(buildCleanFunction, htmlfunction, cssfunction, jsfunction, phpfunction, imgfunction, copyfontsfunction, copyThirdPartyFunction, liveserver)
+const stdbuild = gulp.series(buildCleanFunction, htmlfunction, cssfunction, jsfunction, phpfunction, imgfunction, copyfontsfunction, copyThirdPartyFunction, liveserver)
 
-module.exports = gulp.series(build)
+module.exports = gulp.series(stdbuild)
