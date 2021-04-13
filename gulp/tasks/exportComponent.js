@@ -1,17 +1,18 @@
 const gulp = require('gulp');
 
-const exportComponent = () => {
+var from = ''; //Создадим пустую строку для переменной пути
+const exportComponent = (cb) => {
   let indexOfKey = 0;
   let indexOfSrc = -1;
   process.argv.forEach((el) => {
     if (el == '--from') {
       indexOfSrc = indexOfKey + 1;
+      from = process.argv[indexOfSrc];
     } else {
       indexOfKey++;
     }
   });
-  return gulp.src(process.argv[indexOfSrc])
-    .pipe(gulp.dest('./lab/export/input/'));
+  cb();
 }
 const sass = require('gulp-sass');
 sass.compiler = require('node-sass');
@@ -25,10 +26,11 @@ const processors = [
   })
 ];
 const sassToOutput = () => {
-  return gulp.src('./lab/export/input/**/*.sass')
-  .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
-  .pipe(postcss(processors))
-  .pipe(gulp.dest('./lab/export/output/'))
+  console.log(from);
+  return gulp.src(from + '/**/*.sass')
+    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
+    .pipe(postcss(processors))
+    .pipe(gulp.dest('./lab/export/'))
 }
 const pug = require('gulp-pug');
 const htmlBeautify = require('gulp-html-beautify');
@@ -43,15 +45,24 @@ const htmlminOptions = {
 const posthtml = require('gulp-posthtml')
 const posthtmlWebpWidthSizes = require('../posthtml/posthtmlWebpWidthSizes');
 const pugToOutPut = (cb) => {
-  return gulp.src('./lab/export/input/**/*.pug')
+  return gulp.src(from + '/**/*.pug')
     .pipe(pug())
     .pipe(posthtml([posthtmlWebpWidthSizes()]))
     .pipe(htmlmin(htmlminOptions))
     .pipe(htmlBeautify(htmlBeautifyOptions))
-    .pipe(gulp.dest('./lab/export/output/'))
+    .pipe(gulp.dest('./lab/export/'))
 }
 const copyAssets = (cb) => {
-  return gulp.src(['./lab/export/input/**/*.*', '!./lab/export/input/**/*.sass', '!./lab/export/input/**/*.pug'])
-    .pipe(gulp.dest('./lab/export/output/'))
+  return gulp.src([from + '/**/*.*', '!' + from + '/**/*.sass', '!' + from + '/**/*.pug'])
+    .pipe(gulp.dest('./lab/export/'))
 }
+// При необходимости можно включить функцию транскомпиляции кода
+// const babel = require('gulp-babel');
+// const transCompileES = () => {
+//   return gulp.src('./lab/export/**/*.js')
+//     .pipe(babel({
+//       presets: ['@babel/env']
+//     }))
+//     .pipe(gulp.dest('./lab/export/'))
+// }
 module.exports = gulp.series(exportComponent, sassToOutput, pugToOutPut, copyAssets);

@@ -3,7 +3,7 @@ const gulp = require('gulp')
 const gulpClean = require('gulp-clean')
 
 const cleanExport = () => {
-  return gulp.src(['./lab/export/output/**', './lab/export/input/**'], {read: false})
+  return gulp.src(['./lab/export/**'], {read: false})
   .pipe(gulpClean())
 }
 module.exports = cleanExport;
