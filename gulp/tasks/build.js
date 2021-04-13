@@ -50,31 +50,43 @@ const sassfunction = function () {
     .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
     .pipe(postcss(processors))
     .pipe(cssmin())
-    .pipe(rename(function(path){path.basename += "-min"}))
+    .pipe(rename(function (path) { path.basename += "-min" }))
     .pipe(gulp.dest('./build/'));
 }
 
 //JS function
 //Функция сборщик скриптов страницы из build-script.pug в script.js, если требуется
-const buildCustomStyle = function(){
+const uglify = require('gulp-uglify-es').default;
+const babel = require('gulp-babel');
+const notify = require('gulp-notify');
+const buildCustomStyle = function () {
   return gulp.src(['./src/**/build-script.pug', '!./src/components/**', '!./src/third-party/**'])
-  .pipe(pug())
-  .pipe(rename(function(path){
-    path.basename = 'script';
-    path.extname = '.js'
-  }))
-  .pipe(minify())
-  .pipe(gulp.dest('./build/'));
+    .pipe(pug())
+    .pipe(rename(function (path) {
+      path.basename = 'script';
+      path.extname = '.js'
+    }))
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
+    .pipe(uglify({
+      toplevel: true
+    }).on('error', notify.onError()))
+    .pipe(gulp.dest('./build/'));
 }
-const minify = require('gulp-minify');
 //Если скрипт небольшой минуем этап сборки и пишем сразу в script.js
 const jsMinFunction = function () {
   return gulp.src(['./src/**/script.js', '!./src/components/**', '!./src/third-party/**'])
-    .pipe(minify())
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
+    .pipe(uglify({
+      toplevel: true
+    }).on('error', notify.onError()))
     .pipe(gulp.dest('./build/'));
 }
 //Удаляем жирный JS
-const cleanJsFunction = function() {
+const cleanJsFunction = function () {
   return gulp.src(['./build/**/script.js'], { read: false })
     .pipe(gulpClean());
 }
@@ -111,7 +123,7 @@ const imgMinFunction = function () {
     .pipe(gulp.dest('build/'));
 }
 const webp = require('gulp-webp');
-const webpFunction = function(input, output) {
+const webpFunction = function (input, output) {
   return gulp.src(['src/**/*.png', 'src/**/*.jpg', 'src/**/*.gif', '!./src/components/**', '!./src/third-party/**'])
     .pipe(webp())
     .pipe(gulp.dest('build/'));

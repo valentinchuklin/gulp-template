@@ -11,6 +11,7 @@ const buildCleanFunction = function () {
 
 //2html
 const fileinclude = require('gulp-file-include');
+const pug = require('gulp-pug');
 const htmlmin = require('gulp-htmlmin');
 const posthtml = require('gulp-posthtml');
 const posthtmlWebpWidthSizes = require('../posthtml/posthtmlWebpWidthSizes');
@@ -23,11 +24,8 @@ const htmlminOptions = {
 }
 const htmlfunction = function pug2html(cb) {
   var cacheTimeStamp = new Date().getTime();
-  return gulp.src(['./src/**/index.html', '!./src/components/**', '!./src/third-party/**'])
-    .pipe(fileinclude({
-      prefix: '@@',
-      basepath: '@file'
-    }))
+  return gulp.src(['./src/**/index.pug', '!./src/components/**', '!./src/third-party/**'])
+    .pipe(pug())
     .pipe(posthtml([posthtmlWebpWidthSizes()]))
     .pipe(replace('style.css', 'style-min.css?t=' + cacheTimeStamp))
     .pipe(replace('script.js', 'script-min.js?t=' + cacheTimeStamp))
@@ -35,6 +33,8 @@ const htmlfunction = function pug2html(cb) {
     .pipe(gulp.dest('./build/'));
 }
 //CSS function
+const sass = require('gulp-sass')
+sass.compiler = require('node-sass')
 const autoprefixer = require('autoprefixer')
 const postcss = require('gulp-postcss')
 const sortMediaQueries = require('postcss-sort-media-queries')
@@ -47,11 +47,8 @@ const processors = [
 ]
 
 const cssfunction = function () {
-  return gulp.src(['./src/**/style.css', '!./src/components/**', '!./src/third-party/**'])
-    .pipe(fileinclude({
-      prefix: '@@',
-      basepath: '@file'
-    }))
+  return gulp.src(['./src/**/style.sass', '!./src/components/**', '!./src/third-party/**'])
+    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
     .pipe(postcss(processors))
     .pipe(cssmin())
     .pipe(rename(function (path) { path.basename += "-min" }))

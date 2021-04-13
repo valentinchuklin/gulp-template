@@ -48,6 +48,8 @@ const watchhtmlchanges = function () {
 }
 
 //CSS function
+const sass = require('gulp-sass')
+sass.compiler = require('node-sass')
 const autoprefixer = require('autoprefixer');
 const postcss = require('gulp-postcss');
 const sortMediaQueries = require('postcss-sort-media-queries');
@@ -59,11 +61,8 @@ const processors = [
 ]
 
 const cssfunction = function () {
-  return gulp.src(['./src/**/style.css', '!./src/components/**', '!./src/third-party/**'])
-    .pipe(fileinclude({
-      prefix: '@@',
-      basepath: '@file'
-    }))
+  return gulp.src(['./src/**/style.sass', '!./src/components/**', '!./src/third-party/**'])
+    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
     .pipe(postcss(processors))
     .pipe(gulp.dest('./dev-build/'))
     .pipe(browsersync.stream());

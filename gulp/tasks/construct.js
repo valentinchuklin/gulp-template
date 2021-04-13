@@ -28,7 +28,7 @@ const htmlminOptions = {
 }
 var cacheTimeStamp = new Date().getTime();
 
-const pugfunction = function(cb) {
+const pugfunction = function (cb) {
   return gulp.src(['./src/**/index.pug', '!./src/components/**', '!./src/third-party/**'])
     .pipe(pug())
     .pipe(posthtml([posthtmlWebpWidthSizes()]))
@@ -71,6 +71,7 @@ const watchsasschanges = function () {
 
 //JS function
 //Функция сборщик скриптов страницы из build-script.pug в script.js, если требуется
+const babel = require('gulp-babel');
 const buildCustomStyle = function () {
   return gulp.src(['./src/**/build-script.pug', '!./src/components/**', '!./src/third-party/**'])
     .pipe(pug())
@@ -78,12 +79,18 @@ const buildCustomStyle = function () {
       path.basename = 'script';
       path.extname = '.js'
     }))
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
     .pipe(gulp.dest('./dev-build/'))
     .pipe(browsersync.stream());
 }
 //Если скрипт небольшой минуем этап сборки и пишем сразу в script.js
 const jsMinFunction = function () {
   return gulp.src(['./src/**/script.js', '!./src/components/**', '!./src/third-party/**'])
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
     .pipe(gulp.dest('./dev-build/'))
     .pipe(browsersync.stream());
 }
